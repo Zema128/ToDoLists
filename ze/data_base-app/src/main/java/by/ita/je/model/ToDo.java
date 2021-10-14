@@ -24,6 +24,7 @@ public class ToDo {
     private ZonedDateTime timeCreated;
     private ZonedDateTime timeNotification = null;
     private String text;
+    private boolean done;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "categories")
