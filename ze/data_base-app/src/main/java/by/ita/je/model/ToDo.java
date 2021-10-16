@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -22,7 +24,10 @@ public class ToDo {
     private long id;
 
     private ZonedDateTime timeCreated;
-    private ZonedDateTime timeNotification = null;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private ZonedDateTime timeNotification;
+
+    @NotEmpty
     private String text;
     private boolean done;
 
@@ -30,10 +35,7 @@ public class ToDo {
     @Column(name = "categories")
     private Categories categories;
 
-    @ManyToOne()
-    private User user;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "toDo")
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "todo_id")
     private List<SubTask> subTask;
 }

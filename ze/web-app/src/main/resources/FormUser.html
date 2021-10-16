@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Create</title>
+    <style>
+   body {
+    background-color: #00CC66;
+   }
+  </style>
+</head>
+<body>
+<h1>Создание нвого пользователя:</h1>
+<form action="#" th:action="@{/newUser}" th:object="${user}" method="post">
+    <p>Имя пользователя: <input type="text" pattern="^[a-zA-Z]+$" required th:field="*{username}" /></p>
+    <p>Адрес: <input type="text" pattern="^[a-zA-Z]+$" required  th:field="*{address}" /></p>
+    <p>УНП: <input type="text"  th:field="*{identificationNumber}"  pattern="(^[0-9]{0,7})+$"/></p>
+    <p>Класс опасности: <input type="text"  th:field="*{hazardClass}" pattern="(^[0-9]{0,3})+$"/></p>
+    <p>Вид НП: <input type="text" pattern="^[a-zA-Z]+$" required  th:field="${factory.fuel.nameFuel}"/></p>
+    <p>Вес: <input type="text" pattern="(^[0-9]{0,4})+$" required  th:field="${factory.fuel.weight}"/></p>
+    <p><input type="submit" value="Создать" /> <input type="reset" value="Сбросить" /></p>
+</form>
+<br>
+<form method="get" action="/web-app/">
+    <button type="submit">На главную страницу</button>
+</form>
+</body>
+</html>

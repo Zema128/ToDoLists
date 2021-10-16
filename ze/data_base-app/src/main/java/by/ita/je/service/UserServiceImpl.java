@@ -18,8 +18,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
-        user.setTimeCreated(ZonedDateTime.now());
-        return userDao.save(user);
+        User newUser = new User();
+        newUser.setTimeCreated(ZonedDateTime.now());
+        newUser.setUsername(user.getUsername());
+        newUser.setEmail(user.getEmail());
+        newUser.setPassword(user.getPassword());
+        return userDao.save(newUser);
     }
 
     @Override
