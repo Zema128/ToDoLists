@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class UserDto {
     private String username;
     private String password;
-    private String eMail;
+    private String email;
 }
