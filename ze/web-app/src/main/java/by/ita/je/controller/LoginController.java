@@ -1,11 +1,10 @@
 package by.ita.je.controller;
 
 import by.ita.je.dto.UserDto;
+import by.ita.je.service.api.BusinessService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +16,22 @@ public class LoginController {
 
     private final RestTemplate restTemplate;
     private final String baseUrl = "http://localhost:8003/data_base-app";
+    private final BusinessService businessService;
+
 
     @GetMapping("/")
+    public String home(){
+        return "home";
+    }
+
+    @GetMapping("/login")
     public String login(){
-        return "index";
+        return "login";
+    }
+
+    @GetMapping("/403")
+    public String error403() {
+        return "403";
     }
 
     @GetMapping(value = "/create")
@@ -31,8 +42,8 @@ public class LoginController {
 
     @PostMapping(value = "/create")
     public String created(@ModelAttribute UserDto userDto) {
-        restTemplate.postForObject(baseUrl + "/user", userDto, UserDto.class);
-        return "redirect:/";
+        restTemplate.postForObject(baseUrl + "/user", businessService.create(userDto), UserDto.class);
+        return "redirect:/login";
     }
 
     @ModelAttribute("user")

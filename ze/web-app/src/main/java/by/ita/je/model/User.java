@@ -1,14 +1,28 @@
 package by.ita.je.model;
 
-import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.time.ZonedDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "users")
 public class User {
-    @NotBlank
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private ZonedDateTime timeCreated;
+    @Column(unique = true, nullable = false)
     private String username;
-    @NotBlank
+    @Column(nullable = false)
     private String password;
-    @NotBlank
-    private String matchingPassword;
-    @NotBlank
+    @Column(unique = true, nullable = false)
     private String email;
 }
