@@ -39,7 +39,7 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     @Override
-    public User update(User user, Long id) {
+    public ToDo update(ToDo toDo, Long id) {
         return null;
     }
 

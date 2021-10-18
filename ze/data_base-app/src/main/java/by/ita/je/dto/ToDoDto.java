@@ -16,7 +16,6 @@ import java.util.List;
 @Data
 public class ToDoDto {
     private long id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private ZonedDateTime timeNotification;
     private String text;
     private boolean done;

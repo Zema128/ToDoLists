@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>ToDo list application</title>
+    <title>ToDoUpdate</title>
 </head>
 
 <body>
@@ -41,38 +41,33 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <a class="btn btn-primary" th:href="@{/createtodo}">Add Todo</a>
-        </div>
-
-        <div class="col-12">
-            <table class="table table-bordered my-2">
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Time notification</th>
-                    <th scope="col">Categories</th>
-                    <th scope="col">Condition</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:if="${todos.isEmpty()}">
-                    <td class="text-center" colspan="5">No data</td>
-                </tr>
-                <tr th:each="todo : ${todos}">
-                    <th scope="row" th:text="*{todo.id}">1</th>
-                    <td th:text="${todo.text}">Text</td>
-                    <td th:text="${todo.timeNotification}">2021</td>
-                    <td th:text="${todo.categories}">Common</td>
-                    <td th:text="${todo.done}">Active</td>
-                    <td>
-                        <a class="btn btn-success" th:href="@{/update/{id}(id=${todo.id})}"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" th:href="@{/deletetodo/{id}(id=${todo.id})}"><i class="far fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <form th:action="@{/update}" th:object="${todo}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="text">Description</label>
+                    <input type="text" class="form-control" id="text" th:field="*{text}">
+                    <small class="text-danger" th:each="err: ${#fields.errors('text')}" th:text="${err}"></small>
+                </div>
+                <div class="form-group">
+                    <label for="done">Состояние:</label>
+                    <input type="radio" id="done" th:value="true" th:field="*{done}"> Выполнено
+                    <input type="radio" id="done1" th:value="false" th:field="*{done}"> Активно
+                    <small class="text-danger" th:each="err: ${#fields.errors('done')}" th:text="${err}"></small>
+                </div>
+                <div class="form-group">
+                    <label for="categories">Катерогии:</label>
+                    <input type="radio" id="categories1" th:value="PERSONAL" th:field="*{categories}"> Личные
+                    <input type="radio" id="categories2" th:value="WORK" th:field="*{categories}"> Рабочие
+                    <input type="radio" id="categories" th:value="USERS" th:field="*{categories}"> Пользовательские
+                    <small class="text-danger" th:each="err: ${#fields.errors('categories')}" th:text="${err}"></small>
+                </div>
+                <div class="form-group">
+                    <label for="timeNotification">Date of notification</label>
+                    <input type="datetime-local" class="form-control" id="timeNotification" th:field="*{timeNotification}" >
+                    <small class="text-danger" th:each="err: ${#fields.errors('timeNotification')}" th:text="${err}"></small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
 </div>

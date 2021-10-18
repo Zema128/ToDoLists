@@ -8,9 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -48,6 +46,25 @@ public class ToDoController {
     @PostMapping("/createtodo")
     public String createdToDo(ToDoDto toDoDto){
         restTemplate.postForObject(baseUrl + "/create/" + getUserId(), toDoDto, ToDoDto.class);
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/update/{id}")
+    public String update(@PathVariable(value = "id", required = false) Long id, Model model){
+        ToDoDto toDoDto= restTemplate.getForObject(baseUrl + "/todo/" + id, ToDoDto.class);
+        model.addAttribute("todo", toDoDto);
+        return "FormUpdate";
+    }
+
+    @PostMapping(value = "/update")
+    public String updated(ToDoDto toDoDto){
+        restTemplate.put(baseUrl + "/update/" + toDoDto.getId(), toDoDto, ToDoDto.class);
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/deletetodo/{id}")
+    public String deleteById(@PathVariable(value = "id",required = false) Long id){
+        restTemplate.delete(baseUrl + "/delete/" + id);
         return "redirect:/";
     }
 

@@ -49,10 +49,11 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public ToDo update(ToDo toDo, Long id) {
-        ToDo toDoUpd = toDoDao.findById(id).orElseThrow(() -> new RuntimeException("UPDATE"));
+        ToDo toDoUpd = toDoDao.findById(id).orElseThrow(() -> new RuntimeException("UPDATE EXC"));
         toDoUpd.setDone(toDo.isDone());
         toDoUpd.setText(toDo.getText());
         toDoUpd.setTimeNotification(toDo.getTimeNotification());
+        toDoUpd.setCategories(toDo.getCategories());
         return toDoDao.save(toDoUpd);
     }
 }

@@ -14,7 +14,7 @@ public interface BusinessService {
 
     ToDo read (Long toDoId);
 
-    User update (User user, Long id);
+    ToDo update (ToDo toDo, Long id);
 
     void delete (Long id);
 }
