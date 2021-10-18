@@ -3,6 +3,7 @@ package by.ita.je.service.api;
 import by.ita.je.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     User create(User user);
@@ -16,4 +17,8 @@ public interface UserService {
     void deleteAllById(List<Long> list);
 
     User update(User user, Long id);
+
+    public Optional<String> getCurrentUser();
+
+    public Optional<Long> getCurrentUserId();
 }

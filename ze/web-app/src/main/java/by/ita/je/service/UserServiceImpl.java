@@ -4,12 +4,16 @@ import by.ita.je.dao.UserDao;
 import by.ita.je.model.User;
 import by.ita.je.service.api.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Component
@@ -23,6 +27,25 @@ public class UserServiceImpl implements UserService {
         user.setTimeCreated(ZonedDateTime.now());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.save(user);
+    }
+
+    @Override
+    public Optional<Long> getCurrentUserId(){
+        Optional<String> currentUser = getCurrentUser();
+        if (currentUser.isPresent()){
+            return Optional.ofNullable(userDao.findByUsername(currentUser.get()))
+                    .map(User::getId);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<String> getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            return Optional.of(authentication.getName());
+        }
+        return Optional.empty();
     }
 
     @Override

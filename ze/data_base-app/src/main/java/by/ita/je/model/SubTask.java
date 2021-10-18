@@ -1,5 +1,6 @@
 package by.ita.je.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +28,8 @@ public class SubTask {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private ZonedDateTime timeNotification;
 
-    @ManyToOne()
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "todo_id")
     private ToDo toDo;
 }

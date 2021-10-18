@@ -18,12 +18,6 @@ public class LoginController {
     private final String baseUrl = "http://localhost:8003/data_base-app";
     private final BusinessService businessService;
 
-
-    @GetMapping("/")
-    public String home(){
-        return "home";
-    }
-
     @GetMapping("/login")
     public String login(){
         return "login";
@@ -41,13 +35,8 @@ public class LoginController {
     }
 
     @PostMapping(value = "/create")
-    public String created(@ModelAttribute UserDto userDto) {
+    public String created(UserDto userDto) {
         restTemplate.postForObject(baseUrl + "/user", businessService.create(userDto), UserDto.class);
         return "redirect:/login";
-    }
-
-    @ModelAttribute("user")
-    private UserDto userDto (){
-        return new UserDto();
     }
 }

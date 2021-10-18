@@ -1,4 +1,4 @@
-package by.ita.je.model.enams;
+package by.ita.je.model;
 
 public enum Categories {
     PERSONAL("P"), WORK("W"), USERS("U");
