@@ -13,7 +13,5 @@ public interface UserService {
 
     void deleteById(Long id);
 
-    void deleteAllById(List<Long> list);
-
     User update(User user, Long id);
 }

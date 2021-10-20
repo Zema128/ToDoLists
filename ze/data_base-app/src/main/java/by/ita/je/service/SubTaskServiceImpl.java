@@ -3,6 +3,7 @@ package by.ita.je.service;
 import by.ita.je.dao.SubTaskDao;
 import by.ita.je.model.SubTask;
 import by.ita.je.service.api.SubTaskService;
+import by.ita.je.service.api.ToDoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -28,20 +29,15 @@ public class SubTaskServiceImpl implements SubTaskService {
     }
 
     @Override
-    public List<SubTask> readAll() {
-        List<SubTask> subTasks = new ArrayList<>();
-        subTaskDao.findAll().forEach(subTasks::add);
-        return subTasks;
+    public List<SubTask> readAll(Long todoId) {
+        List<SubTask> list = new ArrayList<>();
+        subTaskDao.findAll().forEach(list::add);
+        return list;
     }
 
     @Override
     public void deleteById(Long id) {
         subTaskDao.deleteById(id);
-    }
-
-    @Override
-    public void deleteAllById(List<Long> list) {
-        subTaskDao.deleteAllById(list);
     }
 
     @Override

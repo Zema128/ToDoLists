@@ -1,12 +1,17 @@
 package by.ita.je.controller;
 
+import by.ita.je.dto.SubTaskDto;
 import by.ita.je.dto.ToDoDto;
+import by.ita.je.model.SubTask;
 import by.ita.je.model.ToDo;
 import by.ita.je.service.api.ToDoService;
 import by.ita.je.service.api.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -30,5 +35,15 @@ public class ToDoController {
     @GetMapping("/todo/{id}")
     public ToDoDto findById(@PathVariable("id") Long id){
         return objectMapper.convertValue(toDoService.readById(id), ToDoDto.class);
+    }
+
+    @GetMapping("/subtasks/{id}")
+    public List<SubTaskDto> readAll(@PathVariable("id") Long todoId){
+        List<SubTask> subTask = toDoService.readAllSubtasks(todoId);
+        List<SubTaskDto> list = new ArrayList<>();
+        for (SubTask subTasks : subTask) {
+            list.add(objectMapper.convertValue(subTasks, SubTaskDto.class));
+        }
+        return list;
     }
 }

@@ -44,11 +44,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteAllById(List<Long> list) {
-        userDao.deleteAllById(list);
-    }
-
-    @Override
     public User update(User user, Long id) {
         User userUpd = userDao.findById(id).orElseThrow(() -> new RuntimeException("UPDATE"));
         userUpd.setUsername(user.getUsername());

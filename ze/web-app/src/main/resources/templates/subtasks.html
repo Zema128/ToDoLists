@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>ToDo list application</title>
+    <title>Subtasks</title>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/}">List</a>
+                <a class="nav-link" th:href="@{#}">Subtasks</a>
             </li>
         </ul>
 
@@ -41,12 +41,8 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <a class="btn btn-primary" th:href="@{/createtodo}">Add Todo</a>
-            <a class="btn btn-info" th:href="@{/createtodo}">Личные Todos</a>
-            <a class="btn btn-info" th:href="@{/createtodo}">Рабочие Todos</a>
-            <a class="btn btn-info" th:href="@{/createtodo}">Пользовательские Todos</a>
-            <a class="btn btn-info" th:href="@{/createtodo}">Календарь</a>
-            <a class="btn btn-info" th:href="@{/createtodo}">Задачи на сегодня</a>
+            <a class="btn btn-outline-success" th:href="@{/}">Назад</a>
+            <a class="btn btn-primary" th:href="@{/createsubtask}">Add Subtask</a>
         </div>
         <div class="col-12">
             <table class="table table-bordered my-2">
@@ -55,25 +51,20 @@
                     <th scope="col" hidden="true">Id</th>
                     <th scope="col">Description</th>
                     <th scope="col">Time notification</th>
-                    <th scope="col">Categories</th>
-                    <th scope="col">Done</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:if="${todos.isEmpty()}">
+                <tr th:if="${subtasks.isEmpty()}">
                     <td class="text-center" colspan="5">No data</td>
                 </tr>
-                <tr th:each="todo : ${todos}">
-                    <th scope="row" hidden="true" th:text="*{todo.id}">1</th>
-                    <td th:text="${todo.text}">Text</td>
-                    <td th:text="${todo.timeNotification}">2021</td>
-                    <td th:text="${todo.categories}">Common</td>
-                    <td th:text="${todo.done}">None</td>
+                <tr th:each="sub : ${subtasks}">
+                    <th scope="row" hidden="true" th:text="*{sub.id}">1</th>
+                    <td th:text="${sub.text}">Text</td>
+                    <td th:text="${sub.timeNotification}">2021</td>
                     <td>
-                        <a class="btn btn-success" th:href="@{/update/{id}(id=${todo.id})}"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" th:href="@{/deletetodo/{id}(id=${todo.id})}"><i class="far fa-trash-alt"></i></a>
-                        <a class="btn btn-primary" th:href="@{/subtasks/{id}(id=${todo.id})}">Subtasks</i></a>
+                        <a class="btn btn-success" th:href="@{/updatesubtask/{id}(id=${sub.id})}"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-danger" th:href="@{/deletesubtask/{id}(id=${sub.id})}"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tbody>
                 </tr>

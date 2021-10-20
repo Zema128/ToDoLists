@@ -9,11 +9,9 @@ public interface SubTaskService {
 
     SubTask readById(Long id);
 
-    List<SubTask> readAll();
+    List<SubTask> readAll(Long todoId);
 
     void deleteById(Long id);
-
-    void deleteAllById(List<Long> list);
 
     SubTask update(SubTask subTask, Long id);
 }

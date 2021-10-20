@@ -1,5 +1,6 @@
 package by.ita.je.service.api;
 
+import by.ita.je.model.SubTask;
 import by.ita.je.model.ToDo;
 
 import java.util.List;
@@ -11,9 +12,9 @@ public interface ToDoService {
 
     List<ToDo> readAll();
 
-    void deleteById(Long id);
+    List<SubTask> readAllSubtasks(Long todoId);
 
-    void deleteAllById(List<Long> list);
+    void deleteById(Long id);
 
     ToDo update(ToDo toDo, Long id);
 }

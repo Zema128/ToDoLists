@@ -1,5 +1,6 @@
 package by.ita.je.service;
 
+import by.ita.je.model.SubTask;
 import by.ita.je.model.ToDo;
 import by.ita.je.model.User;
 import by.ita.je.service.api.BusinessService;

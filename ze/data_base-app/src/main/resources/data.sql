@@ -44,7 +44,13 @@ INSERT INTO user (email, password, time_created, username)
 values ('wfsecondaf@mail.ru', '$2a$10$aAIpYz7U4CkNoNSrPMRASe7dNOGhuR1tV.wt2xRCxcHwylUrxlBS.', '2021-09-11', 'Second');
 -- Pow2
 
-INSERT INTO sub_task (text, time_created, todo_id)
-values ('firstSub', '2021-09-11', 1);
-INSERT INTO sub_task (text, time_created, todo_id)
-values ('firstSub', '2021-09-11', 3);
+INSERT INTO sub_task (text, time_notification, time_created, todo_id)
+values ('firstSub', '2021-09-11', '2021-09-11', 1);
+INSERT INTO sub_task (text, time_notification, time_created, todo_id)
+values ('twoSub', '2021-09-11', '2021-09-11', 1);
+INSERT INTO sub_task (text, time_notification, time_created, todo_id)
+values ('thretSub', '2021-09-11', '2021-09-11', 2);
+INSERT INTO sub_task (text, time_notification, time_created, todo_id)
+values ('fourSub', '2021-09-11', '2021-09-11', 3);
+INSERT INTO sub_task (text, time_notification, time_created, todo_id)
+values ('fiveSub', '2021-09-11', '2021-09-11', 3);

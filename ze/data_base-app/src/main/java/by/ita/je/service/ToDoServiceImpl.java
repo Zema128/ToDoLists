@@ -1,6 +1,7 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.ToDoDao;
+import by.ita.je.model.SubTask;
 import by.ita.je.model.ToDo;
 import by.ita.je.service.api.ToDoService;
 import lombok.AllArgsConstructor;
@@ -38,13 +39,14 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        toDoDao.deleteById(id);
+    public List<SubTask> readAllSubtasks(Long todoId) {
+        ToDo toDo = toDoDao.findById(todoId).get();
+        return toDo.getSubTask();
     }
 
     @Override
-    public void deleteAllById(List<Long> list) {
-        toDoDao.deleteAllById(list);
+    public void deleteById(Long id) {
+        toDoDao.deleteById(id);
     }
 
     @Override
