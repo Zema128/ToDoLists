@@ -1,6 +1,7 @@
 package by.ita.je.model;
 
 import by.ita.je.model.enams.Categories;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -24,9 +26,10 @@ public class ToDo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private ZonedDateTime timeCreated;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private ZonedDateTime timeNotification;
+    private LocalDateTime timeCreated;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime timeNotification;
 
     @NotEmpty
     private String text;

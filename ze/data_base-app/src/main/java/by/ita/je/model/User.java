@@ -9,6 +9,7 @@ import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private ZonedDateTime timeCreated;
+    private LocalDateTime timeCreated;
     @Column(unique = true, nullable = false)
     private String username;
     @Column(nullable = false)

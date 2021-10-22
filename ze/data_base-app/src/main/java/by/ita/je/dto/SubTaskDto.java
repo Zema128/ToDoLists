@@ -1,9 +1,13 @@
 package by.ita.je.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @NoArgsConstructor
@@ -12,5 +16,7 @@ import java.time.ZonedDateTime;
 public class SubTaskDto {
     private long id;
     private String text;
-    private ZonedDateTime timeNotification;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime timeNotification;
 }

@@ -11,6 +11,8 @@ public interface BusinessService {
 
     ToDo create(ToDo toDo, Long userId);
 
+    SubTask createSubTask(SubTask subTask, Long TodoId);
+
     List<ToDo> readAll(Long userId);
 
     ToDo read (Long toDoId);

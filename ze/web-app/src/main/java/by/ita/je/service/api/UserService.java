@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
+    User readByUsername(String username);
+
     User create(User user);
 
     User readById(Long id);

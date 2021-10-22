@@ -45,19 +45,19 @@
                 <input type="hidden" th:field="*{id}">
                 <div class="form-group">
                     <label for="text">Description</label>
-                    <input type="text" class="form-control" id="text" th:field="*{text}" placeholder="Enter description">
+                    <input type="text" class="form-control" required id="text" th:field="*{text}" placeholder="Enter description">
                     <small class="text-danger" th:each="err: ${#fields.errors('text')}" th:text="${err}"></small>
                 </div>
                 <div class="form-group">
                     <label for="categories">Categories:</label>
-                    <input type="radio" id="categories1" th:value="PERSONAL" th:field="*{categories}"> Личные
-                    <input type="radio" id="categories2" th:value="WORK" th:field="*{categories}"> Рабочие
-                    <input type="radio" id="categories" th:value="USERS" th:field="*{categories}"> Пользовательские
+                    <input type="radio" required id="categories1" th:value="PERSONAL" th:field="*{categories}"> Личные
+                    <input type="radio" required id="categories2" th:value="WORK" th:field="*{categories}"> Рабочие
+                    <input type="radio" required id="categories" th:value="USERS" th:field="*{categories}"> Пользовательские
                     <small class="text-danger" th:each="err: ${#fields.errors('categories')}" th:text="${err}"></small>
                 </div>
                 <div class="form-group">
                     <label for="timeNotification">Date of notification</label>
-                    <input type="datetime-local" class="form-control" id="timeNotification" th:field="*{timeNotification}" >
+                    <input type="datetime-local" value="sighting.sightingDate" class="form-control" id="timeNotification" th:field="*{timeNotification}" >
                     <small class="text-danger" th:each="err: ${#fields.errors('timeNotification')}" th:text="${err}"></small>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>

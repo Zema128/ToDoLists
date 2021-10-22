@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>Subtasks</title>
+    <title>Form Sub Task</title>
 </head>
 
 <body>
@@ -41,34 +41,20 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <a class="btn btn-outline-success" th:href="@{/}">Назад</a>
-            <a class="btn btn-primary" th:href="@{/createsubtask}">Add Subtask</a>
-        </div>
-        <div class="col-12">
-            <table class="table table-bordered my-2">
-                <thead>
-                <tr>
-                    <th scope="col" hidden="true">Id</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Time notification</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:if="${subtasks.isEmpty()}">
-                    <td class="text-center" colspan="5">No data</td>
-                </tr>
-                <tr th:each="sub : ${subtasks}">
-                    <th scope="row" hidden="true" th:text="*{sub.id}">1</th>
-                    <td th:text="${sub.text}">Text</td>
-                    <td th:text="${sub.timeNotification}">2021</td>
-                    <td>
-                        <a class="btn btn-success" th:href="@{/updatesubtask/{id}(id=${sub.id})}"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" th:href="@{/deletesubtask/{id}(id=${sub.id})}"><i class="far fa-trash-alt"></i></a>
-                    </td>
-                </tbody>
-                </tr>
-            </table>
+            <form th:action="@{/createsubtask}" th:object="${subtask}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="text">Description</label>
+                    <input type="text" class="form-control" required id="text" th:field="*{text}" placeholder="Enter description">
+                    <small class="text-danger" th:each="err: ${#fields.errors('text')}" th:text="${err}"></small>
+                </div>
+                <div class="form-group">
+                    <label for="timeNotification">Date of notification</label>
+                    <input type="datetime-local" class="form-control" id="timeNotification" th:field="*{timeNotification}" >
+                    <small class="text-danger" th:each="err: ${#fields.errors('timeNotification')}" th:text="${err}"></small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
 </div>

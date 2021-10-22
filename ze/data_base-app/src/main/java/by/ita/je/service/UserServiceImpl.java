@@ -6,6 +6,7 @@ import by.ita.je.service.api.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         User newUser = new User();
-        newUser.setTimeCreated(ZonedDateTime.now());
+        newUser.setTimeCreated(LocalDateTime.now());
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
         newUser.setPassword(user.getPassword());

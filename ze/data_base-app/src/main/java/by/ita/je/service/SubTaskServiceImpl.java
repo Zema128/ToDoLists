@@ -7,6 +7,7 @@ import by.ita.je.service.api.ToDoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class SubTaskServiceImpl implements SubTaskService {
 
     @Override
     public SubTask create(SubTask subTask) {
-        subTask.setTimeCreated(ZonedDateTime.now());
+        subTask.setTimeCreated(LocalDateTime.now());
         return subTaskDao.save(subTask);
     }
 

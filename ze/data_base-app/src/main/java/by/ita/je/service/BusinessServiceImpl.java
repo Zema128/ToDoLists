@@ -29,6 +29,15 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     @Override
+    public SubTask createSubTask(SubTask subTask, Long toDoId){
+        ToDo toDo = toDoService.readById(toDoId);
+        subTask.setToDo(toDo);
+        SubTask subTaskCreated = subTaskService.create(subTask);
+        toDo.getSubTask().add(subTaskCreated);
+        return subTaskCreated;
+    }
+
+    @Override
     public List<ToDo> readAll(Long userId){
         List<ToDo> list = toDoService.readAll().stream().filter(toDo -> toDo.getUser().getId().equals(userId)).toList();
         return list;

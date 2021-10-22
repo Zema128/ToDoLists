@@ -3,6 +3,7 @@ package by.ita.je.dto;
 import by.ita.je.dto.UserDto;
 import by.ita.je.model.Categories;
 import by.ita.je.model.Categories;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -19,8 +21,9 @@ import java.util.List;
 @Data
 public class ToDoDto {
     private long id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private ZonedDateTime timeNotification;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime timeNotification;
     private String text;
     private boolean done;
     private UserDto userDto;

@@ -14,7 +14,7 @@ create table to_do (
 id bigint NOT NULL AUTO_INCREMENT,
 categories varchar(255),
 done boolean not null,
-text varchar(255),
+text varchar(5000),
 time_created timestamp,
 time_notification timestamp,
 user_id bigint,

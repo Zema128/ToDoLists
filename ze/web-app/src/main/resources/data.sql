@@ -12,5 +12,5 @@ INSERT INTO users (email, password, time_created, username)
 values ('wfaf@mail.ru', '$2a$10$NRanpMSgtNgaNiuKUgu.huEGeCpxjmAW3SQ0rjTc5lhsFqJYXiGly', '2021-09-11', 'First');
 -- Pow1
 INSERT INTO users (email, password, time_created, username)
-values ('wfsecondaf@mail.ru', '$2a$10$aAIpYz7U4CkNoNSrPMRASe7dNOGhuR1tV.wt2xRCxcHwylUrxlBS.', '2021-09-11', 'Second');
+values ('Zema128@mail.ru', '$2a$10$aAIpYz7U4CkNoNSrPMRASe7dNOGhuR1tV.wt2xRCxcHwylUrxlBS.', '2021-09-11', 'Second');
 -- Pow2

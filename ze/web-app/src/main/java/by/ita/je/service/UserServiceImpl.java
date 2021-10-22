@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,13 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
+    public User readByUsername(String username){
+        return userDao.findByUsername(username);
+    }
+
+    @Override
     public User create(User user) {
-        user.setTimeCreated(ZonedDateTime.now());
+        user.setTimeCreated(LocalDateTime.now());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.save(user);
     }

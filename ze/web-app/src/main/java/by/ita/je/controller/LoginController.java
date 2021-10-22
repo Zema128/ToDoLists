@@ -37,6 +37,6 @@ public class LoginController {
     @PostMapping(value = "/create")
     public String created(UserDto userDto) {
         restTemplate.postForObject(baseUrl + "/user", businessService.create(userDto), UserDto.class);
-        return "redirect:/login";
+        return "redirect:/Newlogin";
     }
 }

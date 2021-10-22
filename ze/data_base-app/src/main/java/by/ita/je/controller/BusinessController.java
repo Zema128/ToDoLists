@@ -21,9 +21,15 @@ public class BusinessController {
     private final BusinessService businessService;
 
     @PostMapping("/create/{id}")
-    public ToDoDto create(@RequestBody ToDoDto toDoDto,@PathVariable("id") Long userId){
+    public ToDoDto create(@RequestBody ToDoDto toDoDto, @PathVariable("id") Long userId){
         ToDo toDo = objectMapper.convertValue(toDoDto, ToDo.class);
         return objectMapper.convertValue(businessService.create(toDo, userId), ToDoDto.class);
+    }
+
+    @PostMapping("/createsubtask/{id}")
+    public SubTaskDto createSubTask(@RequestBody SubTaskDto subTaskDto, @PathVariable("id") Long toDoId){
+        SubTask subTask = objectMapper.convertValue(subTaskDto, SubTask.class);
+        return objectMapper.convertValue(businessService.createSubTask(subTask, toDoId), SubTaskDto.class);
     }
 
     @GetMapping("/todos/{id}")
