@@ -10,6 +10,7 @@ import by.ita.je.service.api.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,7 +40,12 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Override
     public List<ToDo> readAll(Long userId){
-        List<ToDo> list = toDoService.readAll().stream().filter(toDo -> toDo.getUser().getId().equals(userId)).toList();
+        List<ToDo> list = new ArrayList<>();
+        for (ToDo toDo : toDoService.readAll()) {
+            if (toDo.getUser().getId().equals(userId)) {
+                list.add(toDo);
+            }
+        }
         return list;
     }
 

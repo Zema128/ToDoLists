@@ -26,11 +26,6 @@ public class User {
 
     private LocalDateTime timeCreated;
     @Column(unique = true, nullable = false)
-    private String username;
-    @Column(nullable = false)
-    private String password;
-    @Column(unique = true, nullable = false)
-    private String email;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ToDo> toDos;
 }

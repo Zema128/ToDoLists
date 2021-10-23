@@ -5,7 +5,8 @@ import by.ita.je.model.User;
 import java.util.List;
 
 public interface UserService {
-    User create(User user);
+
+    User create(Long id);
 
     User readById(Long id);
 
@@ -13,5 +14,4 @@ public interface UserService {
 
     void deleteById(Long id);
 
-    User update(User user, Long id);
 }

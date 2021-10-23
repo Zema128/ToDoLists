@@ -22,5 +22,7 @@ public interface UserService {
 
     public Optional<String> getCurrentUser();
 
+    void changePass(User user, Long id);
+
     public Optional<Long> getCurrentUserId();
 }

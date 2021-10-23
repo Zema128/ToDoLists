@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <!-- Required meta tags -->
@@ -11,13 +12,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>Register</title>
+    <title>ToDo list application</title>
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{/login}">ToDo</a>
+    <a class="navbar-brand" th:href="@{/}">ToDo</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,40 +28,21 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="@{/}">List</a>
+                <a class="nav-link" th:href="@{/}">List</a>
             </li>
         </ul>
-
-        <form class="form-inline my-2 my-lg-0" action="#" method="post">
-            <button class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+            <button sec:authorize="isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
         </form>
-        <div class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Login</a>
-        </div>
     </div>
 </nav>
-
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <form th:action="@{/create}" th:object="${user}" method="post">
-                <div class="form-group">
-                    <label for="username">User name</label>
-                    <input type="text" id="username" class="form-control" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" required placeholder="Enter user name" th:field="*{username}">
-                    <small class="text-danger" th:each="err: ${#fields.errors('username')}" th:text="${err}"></small>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" id="email" class="form-control" required placeholder="Enter email" th:field="*{email}">
-                    <small class="text-danger" th:each="err: ${#fields.errors('email')}" th:text="${err}"></small>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" required th:field="*{password}" placeholder="Password">
-                    <small class="text-danger" th:each="err: ${#fields.errors('password')}" th:text="${err}"></small>
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-            </form>
+            <div align="center"><h4>Ссылка для восстановления пароля успешно отправлена. Проверьте эл. почту!</h4></a></div>
+            <div align="center"><a class="btn btn-primary" th:href="@{/login}">На страницу входа</a></div>
+        </div>
+        <div class="col-12">
         </div>
     </div>
 </div>
@@ -76,7 +58,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
 </body>
-
 </html>

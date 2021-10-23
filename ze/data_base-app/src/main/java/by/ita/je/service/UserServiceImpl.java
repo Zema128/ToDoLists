@@ -18,12 +18,10 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
     @Override
-    public User create(User user) {
+    public User create(Long id) {
         User newUser = new User();
+        newUser.setId(id);
         newUser.setTimeCreated(LocalDateTime.now());
-        newUser.setUsername(user.getUsername());
-        newUser.setEmail(user.getEmail());
-        newUser.setPassword(user.getPassword());
         return userDao.save(newUser);
     }
 
@@ -42,12 +40,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         userDao.deleteById(id);
-    }
-
-    @Override
-    public User update(User user, Long id) {
-        User userUpd = userDao.findById(id).orElseThrow(() -> new RuntimeException("UPDATE"));
-        userUpd.setUsername(user.getUsername());
-        return userDao.save(userUpd);
     }
 }

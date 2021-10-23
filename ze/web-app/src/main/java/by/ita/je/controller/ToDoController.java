@@ -2,7 +2,6 @@ package by.ita.je.controller;
 
 import by.ita.je.dto.ToDoDto;
 import by.ita.je.dto.UserDto;
-import by.ita.je.service.api.BusinessService;
 import by.ita.je.service.api.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

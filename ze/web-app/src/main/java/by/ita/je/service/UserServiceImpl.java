@@ -36,6 +36,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void changePass(User user, Long id){
+        User userChange = readById(id);
+        userChange.setPassword(passwordEncoder.encode(user.getPassword()));
+        userDao.save(userChange);
+    }
+
+    @Override
     public Optional<Long> getCurrentUserId(){
         Optional<String> currentUser = getCurrentUser();
         if (currentUser.isPresent()){
