@@ -29,16 +29,4 @@ public class UserServiceImpl implements UserService {
     public User readById(Long id) {
         return userDao.findById(id).get();
     }
-
-    @Override
-    public List<User> readAll() {
-        List<User> users = new ArrayList<>();
-        userDao.findAll().forEach(users::add);
-        return users;
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        userDao.deleteById(id);
-    }
 }

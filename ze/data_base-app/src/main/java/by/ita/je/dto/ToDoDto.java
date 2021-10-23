@@ -23,7 +23,6 @@ public class ToDoDto {
     private LocalDateTime timeNotification;
     private String text;
     private boolean done;
-    private UserDto userDto;
     @Enumerated(EnumType.STRING)
     private Categories categories;
     private List<SubTaskDto> subTask;

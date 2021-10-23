@@ -9,9 +9,4 @@ public interface UserService {
     User create(Long id);
 
     User readById(Long id);
-
-    List<User> readAll();
-
-    void deleteById(Long id);
-
 }
