@@ -28,12 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/}">List</a>
-                <li>
-                <a class="btn btn-warning" th:href="@{/createtodo}">Добавить в друзья</a>
-                <a class="btn btn-warning" th:href="@{/createtodo}">Друзья</a>
-                <a class="btn btn-warning" th:href="@{/createtodo}">С Вами поделились</a>
-        </li>
+                <a class="nav-link" th:href="@{/}">users</a>
             </li>
         </ul>
 
@@ -52,12 +47,12 @@
             <a class="btn btn-info" th:href="@{/todaytasks}">Задачи на сегодня</a>
             <table>
                 <div>
-            <form id="field" method="get">
-                <label for="date_from">С даты: </label>
-                <input id="date_from" name="date_from" required type="datetime-local" class="form-control"/>
-                <label for="date_to">По дату: </label>
-                <input type="datetime-local" id="date_to" required name="date_to" class="form-control"/>
-            </form>
+                    <form id="field" method="get">
+                        <label for="date_from">С даты: </label>
+                        <input id="date_from" name="date_from" required type="datetime-local" class="form-control"/>
+                        <label for="date_to">По дату: </label>
+                        <input type="datetime-local" id="date_to" required name="date_to" class="form-control"/>
+                    </form>
                     <br>
                     <button class="btn btn-info" form="field" type="submit" formaction="/web-app/betweendates">Поиск</button>
                 </div>
@@ -76,23 +71,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:if="${todos.isEmpty()}">
+                <tr th:if="${categor.isEmpty()}">
                     <td class="text-center" colspan="5">No data</td>
                 </tr>
-                <tr th:each="todo : ${todos}">
-                    <th scope="row" hidden="true" th:text="*{todo.id}">1</th>
-                    <td th:text="${todo.text}">Text</td>
-                    <td th:text="${todo.timeNotification}">2021</td>
-                    <td th:text="${todo.categories}">Common</td>
-                    <td th:text="${todo.done}">None</td>
+                <tr th:each="cat : ${categor}">
+                    <th scope="row" hidden="true" th:text="*{cat.id}">1</th>
+                    <td th:text="${cat.text}">Text</td>
+                    <td th:text="${cat.timeNotification}">2021</td>
+                    <td th:text="${cat.categories}">Common</td>
+                    <td th:text="${cat.done}">None</td>
                     <td>
-                        <a class="btn btn-success" th:href="@{/update/{id}(id=${todo.id})}"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" th:href="@{/deletetodo/{id}(id=${todo.id})}"><i class="far fa-trash-alt"></i></a>
-                        <a class="btn btn-primary" th:href="@{/subtasks/{id}(id=${todo.id})}">Subtasks</i></a>
+                        <a class="btn btn-success" th:href="@{/update/{id}(id=${cat.id})}"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-danger" th:href="@{/deletetodo/{id}(id=${cat.id})}"><i class="far fa-trash-alt"></i></a>
+                        <a class="btn btn-primary" th:href="@{/subtasks/{id}(id=${cat.id})}">Subtasks</i></a>
                     </td>
                 </tbody>
                 </tr>
             </table>
+            <a class="btn btn-outline-success" th:href="@{/}">Назад</a>
         </div>
     </div>
 </div>
