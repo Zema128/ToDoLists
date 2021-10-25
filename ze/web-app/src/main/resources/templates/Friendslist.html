@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>Password</title>
+    <title>Friends list</title>
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{/login}">ToDo</a>
+    <a class="navbar-brand" th:href="@{/}">ToDo</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,28 +28,47 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{#}">List</a>
+                <a class="nav-link" th:href="@{/}">Friends</a>
+            <li>
+                <a class="btn btn-warning" th:href="@{/createtodo}">Добавить в друзья</a>
+                <a class="btn btn-warning" th:href="@{/friends}">Друзья</a>
+                <a class="btn btn-warning" th:href="@{/createtodo}">С Вами поделились</a>
+            </li>
             </li>
         </ul>
 
         <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
             <button sec:authorize="isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
-            <a class="btn btn-outline-success my-2 my-sm-0" th:href="@{/create}">Register</a>
         </form>
     </div>
 </nav>
-
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <form th:action="@{/password}" th:object="${pass}" method="post">
-                <div class="form-group">
-                    <label for="username">Введите username для восстановления пароля:</label>
-                    <input type="text" class="form-control" th:field="*{username}" id="username" name="username" placeholder="Enter username">
-                    <small class="form-text text-danger" th:if="${param.error != null}">Incorrect username</small>
-                </div>
-                <input class="btn btn-primary" type="submit"></input>
-            </form>
+            <table class="table table-bordered my-2">
+                <thead>
+                <tr>
+                    <th scope="col" hidden="true">Id</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${friends.isEmpty()}">
+                    <td class="text-center" colspan="5">No data</td>
+                </tr>
+                <tr th:each="friend : ${friends}">
+                    <th scope="row" hidden="true" th:text="*{friend.id}">1</th>
+                    <td th:text="${friend.username}">Text</td>
+                    <td th:text="${friend.email}">2021</td>
+                    <td>
+                        <a class="btn btn-danger" th:href="@{/deletefriend/{id}(id=${friend.id})}"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tbody>
+                </tr>
+            </table>
+            <a class="btn btn-outline-success" th:href="@{/}">Назад</a>
         </div>
     </div>
 </div>
