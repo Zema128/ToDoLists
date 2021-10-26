@@ -15,10 +15,15 @@ import javax.persistence.Id;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Invite {
+public class SharedList {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long fromUser_id;
-    private Long toUser_id;
+
+    private boolean forChanges;
+    private Long fromId;
+    private Long toId;
+    private Long toDoId;
+
 }

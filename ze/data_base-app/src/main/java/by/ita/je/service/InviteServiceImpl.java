@@ -1,9 +1,7 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.InviteDao;
-import by.ita.je.dto.InviteDto;
 import by.ita.je.model.Invite;
-import by.ita.je.model.enams.InviteStatus;
 import by.ita.je.service.api.InviteService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +20,6 @@ public class InviteServiceImpl implements InviteService {
 
     @Override
     public Invite create (Invite invite){
-        invite.setStatus(InviteStatus.PROCESSING);
         List<Invite> invites = inviteDao.readAllByToUser_id(invite.getToUser_id());
         for (Invite inv : invites) {
             if (inv.getToUser_id() == invite.getToUser_id() && inv.getFromUser_id() == invite.getFromUser_id())

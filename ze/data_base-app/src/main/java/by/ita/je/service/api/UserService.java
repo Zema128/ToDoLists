@@ -11,7 +11,9 @@ public interface UserService {
 
     User readById(Long id);
 
-    Set<User> readFriendsList(Long id);
+    Set<Long> readFriendsList(Long id);
+
+    void deleteFriend(Long targetId, Long userId);
 
     void update(Set<User> user, Long id);
 

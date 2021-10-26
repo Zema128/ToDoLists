@@ -26,4 +26,6 @@ public class ToDoDto {
     @Enumerated(EnumType.STRING)
     private Categories categories;
     private List<SubTaskDto> subTask;
+    private UserDto userDto;
+    private Long userId;
 }

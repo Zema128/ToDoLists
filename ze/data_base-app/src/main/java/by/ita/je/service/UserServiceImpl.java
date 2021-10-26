@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,10 +32,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<User> readFriendsList(Long id){
+    public Set<Long> readFriendsList(Long id){
         User user = userDao.findById(id).get();
         Set<User> users = user.getFriends();
-        return users;
+        Set<Long> userList = new HashSet<>();
+        for (User us : users) {
+            userList.add(us.getId());
+        }
+        return userList;
+    }
+
+    @Override
+    public void deleteFriend(Long targetId, Long userId){
+        User user = readById(userId);
+        Set<User> userSet = user.getFriends();
+        userSet.removeIf(user1 -> user1.getId() == targetId);
+        update(userSet, userId);
     }
 
     @Override

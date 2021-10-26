@@ -32,12 +32,13 @@
             <li>
                 <a class="btn btn-warning" th:href="@{/addfriend}">Добавить в друзья</a>
                 <a class="btn btn-warning" th:href="@{/friends}">Друзья</a>
-                <a class="btn btn-warning" th:href="@{/createtodo}">С Вами поделились</a>
+                <a class="btn btn-warning" th:href="@{/readallshared}">С Вами поделились</a>
             </li>
             </li>
         </ul>
 
-        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+        <form class="form-inline my-2 my-lg-0" th:acti
+              on="@{/logout}" method="post">
             <button sec:authorize="isAuthenticated()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
         </form>
     </div>

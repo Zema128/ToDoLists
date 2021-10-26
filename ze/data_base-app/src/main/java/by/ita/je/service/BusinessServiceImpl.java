@@ -2,10 +2,7 @@ package by.ita.je.service;
 
 import by.ita.je.dao.InviteDao;
 import by.ita.je.dao.UserDao;
-import by.ita.je.model.Invite;
-import by.ita.je.model.SubTask;
-import by.ita.je.model.ToDo;
-import by.ita.je.model.User;
+import by.ita.je.model.*;
 import by.ita.je.service.api.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +19,7 @@ public class BusinessServiceImpl implements BusinessService {
     private final ToDoService toDoService;
     private final SubTaskService subTaskService;
     private final InviteService inviteService;
+    private final SharedService sharedService;
 
     @Override
     public Invite createInvite(Invite invite){
@@ -41,6 +39,26 @@ public class BusinessServiceImpl implements BusinessService {
         Set<User> users = userTo.getFriends();
         users.add(userFrom);
         userService.update(users, invite.getToUser_id());
+    }
+
+    @Override
+    public List<ToDo> sharedListsRead(Long toId){
+        List<SharedList> sharedLists = sharedService.sharedListsRead(toId);
+        List<ToDo> toDos = new ArrayList<>();
+        for (SharedList shar:sharedLists) {
+            toDos.add(toDoService.readById(shar.getToId()));
+        }
+        return toDos;
+    }
+
+    @Override
+    public List<ToDo> sharedListsChange(Long toId){
+        List<SharedList> sharedLists = sharedService.sharedListsChange(toId);
+        List<ToDo> toDos = new ArrayList<>();
+        for (SharedList shar:sharedLists) {
+            toDos.add(toDoService.readById(shar.getToId()));
+        }
+        return toDos;
     }
 
     @Transactional

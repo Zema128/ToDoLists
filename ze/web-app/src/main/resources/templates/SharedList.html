@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>ToDo list application</title>
+    <title>Shared List</title>
 </head>
 
 <body>
@@ -28,12 +28,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/}">List</a>
-                <li>
+                <a class="nav-link" th:href="@{/}">SharedList</a>
+            <li>
                 <a class="btn btn-warning" th:href="@{/addfriend}">Добавить в друзья</a>
                 <a class="btn btn-warning" th:href="@{/friends}">Друзья</a>
                 <a class="btn btn-warning" th:href="@{/readallshared}">С Вами поделились</a>
-        </li>
+            </li>
             </li>
         </ul>
 
@@ -45,55 +45,55 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <a class="btn btn-primary" th:href="@{/createtodo}">Add Todo</a>
-            <a class="btn btn-info" th:href="@{/searchpersonal}">Личные Todos</a>
-            <a class="btn btn-info" th:href="@{/searchwork}">Рабочие Todos</a>
-            <a class="btn btn-info" th:href="@{/searchusers}">Пользовательские Todos</a>
-            <a class="btn btn-info" th:href="@{/todaytasks}">Задачи на сегодня</a>
-            <table>
-                <div>
-            <form id="field" method="get">
-                <label for="date_from">С даты: </label>
-                <input id="date_from" name="date_from" required type="datetime-local" class="form-control"/>
-                <label for="date_to">По дату: </label>
-                <input type="datetime-local" id="date_to" required name="date_to" class="form-control"/>
-            </form>
-                    <br>
-                    <button class="btn btn-info" form="field" type="submit" formaction="/web-app/betweendates">Поиск</button>
-                </div>
-            </table>
-        </div>
-        <div class="col-12">
+            <h4>Список для просмотра</h4>
             <table class="table table-bordered my-2">
                 <thead>
                 <tr>
                     <th scope="col" hidden="true">Id</th>
+                    <th scope="col">От кого</th>
                     <th scope="col">Description</th>
                     <th scope="col">Time notification</th>
-                    <th scope="col">Categories</th>
-                    <th scope="col">Done</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${onlyread.isEmpty()}">
+                    <td class="text-center" colspan="5">No data</td>
+                </tr>
+                <tr th:each="read : ${onlyread}">
+                    <th scope="row" hidden="true" th:text="*{read.id}">1</th>
+                    <td th:text="${read.username}">Text</td>
+                    <td th:text="${read.text}">2021</td>
+                    <td th:text="${read.timeNotification}">2021</td>
+                </tbody>
+                </tr>
+            </table>
+            <h4>Список для изменения</h4>
+            <table class="table table-bordered my-2">
+                <thead>
+                <tr>
+                    <th scope="col" hidden="true">Id</th>
+                    <th scope="col">От кого</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Time notification</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:if="${todos.isEmpty()}">
+                <tr th:if="${readchange.isEmpty()}">
                     <td class="text-center" colspan="5">No data</td>
                 </tr>
-                <tr th:each="todo : ${todos}">
-                    <th scope="row" hidden="true" th:text="*{todo.id}">1</th>
-                    <td th:text="${todo.text}">Text</td>
-                    <td th:text="${todo.timeNotification}">2021</td>
-                    <td th:text="${todo.categories}">Common</td>
-                    <td th:text="${todo.done}">None</td>
+                <tr th:each="change : ${readchange}">
+                    <th scope="row" hidden="true" th:text="*{change.id}">1</th>
+                    <td th:text="${change.username}">Text</td>
+                    <td th:text="${change.text}">2021</td>
+                    <td th:text="${change.timeNotification}">2021</td>
                     <td>
-                        <a class="btn btn-success" th:href="@{/update/{id}(id=${todo.id})}"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" th:href="@{/deletetodo/{id}(id=${todo.id})}"><i class="far fa-trash-alt"></i></a>
-                        <a class="btn btn-primary" th:href="@{/subtasks/{id}(id=${todo.id})}">Subtasks</i></a>
-                        <a class="btn btn-primary" th:href="@{/createshare/{id}(id=${todo.id})}"><i class="fas fa-share"></i></a>
+                        <a class="btn btn-danger" th:href="@{/update/{id}(id=${change.id})}"><i class="fas fa-edit"></i></a>
                     </td>
                 </tbody>
                 </tr>
             </table>
+            <a class="btn btn-outline-success" th:href="@{/}">Назад</a>
         </div>
     </div>
 </div>

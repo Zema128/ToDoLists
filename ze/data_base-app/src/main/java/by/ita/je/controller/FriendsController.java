@@ -6,6 +6,8 @@ import by.ita.je.dto.UserDto;
 import by.ita.je.model.Invite;
 import by.ita.je.service.InviteServiceImpl;
 import by.ita.je.service.api.BusinessService;
+import by.ita.je.service.api.InviteService;
+import by.ita.je.service.api.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,9 @@ import java.util.stream.Collectors;
 @RestController
 public class FriendsController {
     private final ObjectMapper objectMapper;
-    private final InviteServiceImpl inviteService;
+    private final InviteService inviteService;
     private final BusinessService businessService;
+    private final UserService userService;
 
     @GetMapping("/invite/{id}")
     public List<InviteDto> invitedList(@PathVariable("id") Long id){
@@ -46,5 +49,12 @@ public class FriendsController {
     public void deniedFriend(@PathVariable("id") Long id,
                              @PathVariable("userId") Long userId){
         businessService.deniedFriend(id, userId);
+    }
+
+    @DeleteMapping("/deletefriend/{id}/{userId}")
+    public void deleteFriend(@PathVariable("id") Long id,
+                             @PathVariable("userId") Long userId){
+        userService.deleteFriend(id, userId);
+        userService.deleteFriend(userId, id);
     }
 }

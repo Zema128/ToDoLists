@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Controller
@@ -34,12 +35,12 @@ public class FriendController {
 
     @GetMapping("/friends")
     public String listFriends(Model model){
-        ResponseEntity<UserDto[]> userDtos = restTemplate.getForEntity(baseUrl + "/friends/" + getUserId(),
-                UserDto[].class);
-        List<UserDto> listUser = Arrays.asList(userDtos.getBody());
+        ResponseEntity<Long[]> userDtos = restTemplate.getForEntity(baseUrl + "/friends/" + getUserId(),
+                Long[].class);
+        List<Long> listUser = Arrays.asList(userDtos.getBody());
         List<User> friends = new ArrayList<>();
-        for (UserDto friend : listUser) {
-            friends.add(userService.readById(friend.getId()));
+        for (Long friend : listUser) {
+            friends.add(userService.readById(friend));
         }
         model.addAttribute("friends", friends);
         ResponseEntity<InviteDto[]> responseEntity =
@@ -84,6 +85,7 @@ public class FriendController {
 
     @GetMapping("/deletefriend/{id}")
     public String deleteFriend(@PathVariable("id") Long id){
+        restTemplate.delete(baseUrl + "/deletefriend/" + id + "/" + getUserId());
         return "redirect:/friends";
     }
 }

@@ -24,13 +24,9 @@ public class UserController {
     }
 
     @GetMapping("/friends/{id}")
-    public List<UserDto> findById(@PathVariable("id") Long id){
-        Set<User> userSet = userService.readFriendsList(id);
-        List<UserDto> list = new ArrayList<>();
-        for (User user : userSet) {
-            list.add(objectMapper.convertValue(user, UserDto.class));
-        }
-        return list;
+    public Set<Long> findById(@PathVariable("id") Long id){
+        Set<Long> userSet = userService.readFriendsList(id);
+        return userSet;
     }
 
     @GetMapping("/users")

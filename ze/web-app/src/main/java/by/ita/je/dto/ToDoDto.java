@@ -30,4 +30,6 @@ public class ToDoDto {
     @Enumerated(EnumType.STRING)
     private Categories categories;
     private List<SubTaskDto> subTask;
+    private String username;
+    private Long userId;
 }

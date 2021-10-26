@@ -14,6 +14,10 @@ public interface BusinessService {
 
     void acceptFriend(Long id, Long userId);
 
+    List<ToDo> sharedListsRead(Long toId);
+
+    List<ToDo> sharedListsChange(Long toId);
+
     void acceptSecondFriend(Long id, Long userId);
 
     void deniedFriend(Long id, Long userId);

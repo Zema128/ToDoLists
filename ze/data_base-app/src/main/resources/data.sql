@@ -1,3 +1,11 @@
+create table shared_list (
+id bigint NOT NULL AUTO_INCREMENT,
+for_changes boolean not null,
+from_id bigint,
+to_do_id bigint,
+to_id bigint,
+primary key (id));
+
 create table invite (
 id bigint NOT NULL AUTO_INCREMENT,
 from_user_id bigint,

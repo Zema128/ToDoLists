@@ -66,4 +66,9 @@ public class ToDoController {
         restTemplate.delete(baseUrl + "/delete/" + id);
         return "redirect:/";
     }
+
+    @GetMapping("/sharedlist")
+    public String sharedList(){
+        return "SharedList";
+    }
 }
