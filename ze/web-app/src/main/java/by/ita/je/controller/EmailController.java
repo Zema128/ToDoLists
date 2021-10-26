@@ -7,7 +7,6 @@ import by.ita.je.service.api.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +17,14 @@ public class EmailController {
     @Autowired
     public JavaMailSender emailSender;
     private final UserService userService;
-    private final BCryptPasswordEncoder passwordEncoder;
     private final EmailService emailService;
     private final ObjectMapper objectMapper;
     private Long userId;
 
-    public EmailController(UserService userService, BCryptPasswordEncoder passwordEncoder, EmailService emailService, ObjectMapper objectMapper) {
+
+    public EmailController(UserService userService, EmailService emailService,
+                           ObjectMapper objectMapper) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
         this.objectMapper = objectMapper;
     }

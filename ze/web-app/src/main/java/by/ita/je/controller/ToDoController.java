@@ -66,10 +66,4 @@ public class ToDoController {
         restTemplate.delete(baseUrl + "/delete/" + id);
         return "redirect:/";
     }
-
-    @ModelAttribute("user")
-    private UserDto userDto (){
-        return new UserDto();
-    }
-
 }

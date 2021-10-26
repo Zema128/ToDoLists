@@ -13,5 +13,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 public class UserDto {
+    private Long id;
     private Set<User> friends;
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -35,5 +36,13 @@ public class SubTaskController {
         SubTask subTask = objectMapper.convertValue(subTaskDto, SubTask.class);
         SubTask subTaskUpdated = subTaskService.update(subTask, id);
         return objectMapper.convertValue(subTaskUpdated, SubTaskDto.class);
+    }
+
+    @GetMapping("/subtasks")
+    public List<SubTaskDto> subTasks(){
+        List<SubTaskDto> subTaskDtos = subTaskService.readAll()
+                .stream()
+                .map(subTask -> objectMapper.convertValue(subTask, SubTaskDto.class)).collect(Collectors.toList());
+        return subTaskDtos;
     }
 }

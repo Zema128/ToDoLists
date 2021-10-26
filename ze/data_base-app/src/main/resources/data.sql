@@ -1,6 +1,9 @@
-DROP TABLE if EXISTS sub_task CASCADE;
-DROP TABLE if EXISTS to_do CASCADE;
-DROP TABLE if EXISTS user CASCADE;
+create table invite (
+id bigint NOT NULL AUTO_INCREMENT,
+from_user_id bigint,
+status varchar (255),
+to_user_id bigint,
+primary key (id));
 
 create table sub_task (
 id bigint NOT NULL AUTO_INCREMENT,
@@ -67,8 +70,6 @@ INSERT INTO sub_task (text, time_notification, time_created, todo_id)
 values ('fiveSub', '2021-09-11', '2021-09-11', 3);
 
 INSERT INTO user_friends (user_id, friends_id)
-values (1, 2);
-INSERT INTO user_friends (user_id, friends_id)
 values (1, 3);
 INSERT INTO user_friends (user_id, friends_id)
 values (3, 2);
@@ -76,3 +77,12 @@ INSERT INTO user_friends (user_id, friends_id)
 values (3, 5);
 INSERT INTO user_friends (user_id, friends_id)
 values (2, 6);
+
+INSERT INTO invite (from_user_id, status, to_user_id)
+values (1, 'PROCESSING', 2);
+INSERT INTO invite (from_user_id, status, to_user_id)
+values (1, 'PROCESSING', 3);
+INSERT INTO invite (from_user_id, status, to_user_id)
+values (1, 'PROCESSING', 4);
+INSERT INTO invite (from_user_id, status, to_user_id)
+values (5, 'PROCESSING', 1);

@@ -30,7 +30,7 @@
             <li class="nav-item active">
                 <a class="nav-link" th:href="@{/}">Friends</a>
             <li>
-                <a class="btn btn-warning" th:href="@{/createtodo}">Добавить в друзья</a>
+                <a class="btn btn-warning" th:href="@{/addfriend}">Добавить в друзья</a>
                 <a class="btn btn-warning" th:href="@{/friends}">Друзья</a>
                 <a class="btn btn-warning" th:href="@{/createtodo}">С Вами поделились</a>
             </li>
@@ -45,6 +45,32 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
+            <h4>Заявки в друзья</h4>
+            <table class="table table-bordered my-2">
+                <thead>
+                <tr>
+                    <th scope="col" hidden="true">Id</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${invites.isEmpty()}">
+                    <td class="text-center" colspan="5">No data</td>
+                </tr>
+                <tr th:each="invite : ${invites}">
+                    <th scope="row" hidden="true" th:text="*{invite.id}">1</th>
+                    <td th:text="${invite.username}">Text</td>
+                    <td th:text="${invite.email}">2021</td>
+                    <td>
+                        <a class="btn btn-success" th:href="@{/acceptfriend/{id}(id=${invite.id})}"><i class="fas fa-check"></i></a>
+                        <a class="btn btn-danger" th:href="@{/deniedfriend/{id}(id=${invite.id})}"><i class="fas fa-times delete"></i></a>
+                    </td>
+                </tbody>
+                </tr>
+            </table>
+            <h4>Друзья</h4>
             <table class="table table-bordered my-2">
                 <thead>
                 <tr>
