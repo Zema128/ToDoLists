@@ -68,16 +68,16 @@ values ('2021-09-11');
 INSERT INTO user (time_created)
 values ('2021-09-11');
 
-INSERT INTO sub_task (text, time_notification, time_created, todo_id, sent_message)
-values ('firstSub', '2021-09-11', '2021-09-11', 1, false);
-INSERT INTO sub_task (text, time_notification, time_created, todo_id, sent_message)
-values ('twoSub', '2021-09-11', '2021-09-11', 1, false);
-INSERT INTO sub_task (text, time_notification, time_created, todo_id, sent_message)
-values ('thretSub', '2021-09-11', '2021-09-11', 2, false);
-INSERT INTO sub_task (text, time_notification, time_created, todo_id, sent_message)
-values ('fourSub', '2021-09-11', '2021-09-11', 3, false);
-INSERT INTO sub_task (text, time_notification, time_created, todo_id, sent_message)
-values ('fiveSub', '2021-09-11', '2021-09-11', 3, false);
+INSERT INTO sub_task (text, time_created, todo_id, sent_message)
+values ('firstSub', '2021-09-11', 1, false);
+INSERT INTO sub_task (text, time_created, todo_id, sent_message)
+values ('twoSub', '2021-09-11', 1, false);
+INSERT INTO sub_task (text, time_created, todo_id, sent_message)
+values ('thretSub', '2021-09-11', 2, false);
+INSERT INTO sub_task (text, time_created, todo_id, sent_message)
+values ('fourSub', '2021-09-11', 3, false);
+INSERT INTO sub_task (text, time_created, todo_id, sent_message)
+values ('fiveSub', '2021-09-11', 3, false);
 
 INSERT INTO user_friends (user_id, friends_id)
 values (1, 3);

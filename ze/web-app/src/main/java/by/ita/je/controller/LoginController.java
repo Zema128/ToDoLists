@@ -25,9 +25,9 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/403")
+    @GetMapping("/error")
     public String error403() {
-        return "403";
+        return "error";
     }
 
     @GetMapping(value = "/create")

@@ -1,6 +1,7 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.InviteDao;
+import by.ita.je.exceptions.AccessException;
 import by.ita.je.model.Invite;
 import by.ita.je.service.api.InviteService;
 import lombok.AllArgsConstructor;
@@ -25,9 +26,9 @@ public class InviteServiceImpl implements InviteService {
         List<Invite> invites = inviteDao.readAllByToUser_id(invite.getToUser_id());
         for (Invite inv : invites) {
             if (inv.getToUser_id() == invite.getToUser_id() && inv.getFromUser_id() == invite.getFromUser_id())
-                throw new RuntimeException("Заявка уже отправлена!");
-            if (invite.getToUser_id() == invite.getFromUser_id())
-                throw new RuntimeException("Нельзя самого себя добавлять в друзья!");
+                throw new AccessException("Заявка уже отправлена!");
+            if (invite.getToUser_id() == inv.getFromUser_id() || invite.getFromUser_id() == inv.getToUser_id())
+                throw new AccessException("Нельзя самого себя добавлять в друзья!");
         }
         return inviteDao.save(invite);
     }

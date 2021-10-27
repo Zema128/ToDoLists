@@ -1,6 +1,7 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.SubTaskDao;
+import by.ita.je.exceptions.NotFoundException;
 import by.ita.je.model.SubTask;
 import by.ita.je.model.ToDo;
 import by.ita.je.service.api.SubTaskService;
@@ -39,7 +40,7 @@ public class SubTaskServiceImpl implements SubTaskService {
 
     @Override
     public SubTask update(SubTask subTask, Long id) {
-        SubTask subTaskUpd = subTaskDao.findById(id).orElseThrow(() -> new RuntimeException("UPDATE"));
+        SubTask subTaskUpd = subTaskDao.findById(id).orElseThrow(() -> new NotFoundException("SubTask not found!"));
         if (subTaskUpd.getTimeNotification() != subTask.getTimeNotification()){
             subTaskUpd.setSentMessage(false);
         }

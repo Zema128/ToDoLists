@@ -2,6 +2,7 @@ package by.ita.je.service;
 
 import by.ita.je.dao.InviteDao;
 import by.ita.je.dao.UserDao;
+import by.ita.je.exceptions.AccessException;
 import by.ita.je.model.*;
 import by.ita.je.service.api.*;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class BusinessServiceImpl implements BusinessService {
     public Invite createInvite(Invite invite){
         Set<User> friends = userService.readById(invite.getFromUser_id()).getFriends();
         for (User user : friends) {
-            if (user.getId() == invite.getToUser_id()) throw new RuntimeException("Уже есть в друзьях!");
+            if (user.getId() == invite.getToUser_id()) throw new AccessException("Уже есть в друзьях!");
         }
         return inviteService.create(invite);
     }

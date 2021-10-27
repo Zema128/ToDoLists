@@ -1,6 +1,7 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.UserDao;
+import by.ita.je.exceptions.UserNotFoundExceptions;
 import by.ita.je.model.User;
 import by.ita.je.service.api.UserService;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User readByUsername(String username){
         User user = userDao.findByUsername(username);
-        if (user == null) throw new RuntimeException("Нет такого пользователя!");
+        if (user == null) throw new UserNotFoundExceptions();
         return user;
     }
 

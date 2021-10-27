@@ -1,6 +1,7 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.ToDoDao;
+import by.ita.je.exceptions.NotFoundException;
 import by.ita.je.model.SubTask;
 import by.ita.je.model.ToDo;
 import by.ita.je.service.api.ToDoService;
@@ -59,7 +60,7 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public ToDo update(ToDo toDo, Long id) {
-        ToDo toDoUpd = toDoDao.findById(id).orElseThrow(() -> new RuntimeException("UPDATE EXC"));
+        ToDo toDoUpd = toDoDao.findById(id).orElseThrow(() -> new NotFoundException("ToDo not found!"));
         if (toDoUpd.getTimeNotification() != toDo.getTimeNotification()){
             toDoUpd.setSentMessage(false);
         }

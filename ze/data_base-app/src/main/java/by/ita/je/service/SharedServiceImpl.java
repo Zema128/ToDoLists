@@ -1,6 +1,7 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.SharedDao;
+import by.ita.je.exceptions.AccessException;
 import by.ita.je.model.Invite;
 import by.ita.je.model.SharedList;
 import by.ita.je.service.api.SharedService;
@@ -20,11 +21,11 @@ public class SharedServiceImpl implements SharedService {
     public void createShared(SharedList sharedList){
         List<SharedList> list = sharedDao.readAllByToId(sharedList.getToId());
         if (sharedList.getToId() == sharedList.getFromId())
-            throw new RuntimeException("Нельзя делиться с самим собой!");
+            throw new AccessException("Нельзя делиться с самим собой!");
         for (SharedList shard : list) {
             if (shard.getToId() == sharedList.getToId() && shard.getFromId() == sharedList.getFromId()
                     && shard.getToDoId() == sharedList.getToDoId())
-                throw new RuntimeException("Вы уже поделились задачей!");
+                throw new AccessException("Вы уже поделились задачей!");
         }
         sharedDao.save(sharedList);
     }
