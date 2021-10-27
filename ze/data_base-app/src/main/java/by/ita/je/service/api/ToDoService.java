@@ -16,5 +16,7 @@ public interface ToDoService {
 
     void deleteById(Long id);
 
+    void sentMail(Long toDoId);
+
     ToDo update(ToDo toDo, Long id);
 }

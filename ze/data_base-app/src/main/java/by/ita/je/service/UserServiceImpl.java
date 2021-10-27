@@ -6,6 +6,7 @@ import by.ita.je.service.api.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 @AllArgsConstructor
 @Component
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;

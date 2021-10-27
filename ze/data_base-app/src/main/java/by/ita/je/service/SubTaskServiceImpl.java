@@ -8,6 +8,7 @@ import by.ita.je.service.api.ToDoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Component
+@Transactional
 public class SubTaskServiceImpl implements SubTaskService {
 
     private final SubTaskDao subTaskDao;
@@ -38,9 +40,19 @@ public class SubTaskServiceImpl implements SubTaskService {
     @Override
     public SubTask update(SubTask subTask, Long id) {
         SubTask subTaskUpd = subTaskDao.findById(id).orElseThrow(() -> new RuntimeException("UPDATE"));
+        if (subTaskUpd.getTimeNotification() != subTask.getTimeNotification()){
+            subTaskUpd.setSentMessage(false);
+        }
         subTaskUpd.setText(subTask.getText());
         subTaskUpd.setTimeNotification(subTask.getTimeNotification());
         return subTaskDao.save(subTaskUpd);
+    }
+
+    @Override
+    public void sentMail(Long subTaskId){
+        SubTask subTask = readById(subTaskId);
+        subTask.setSentMessage(true);
+        subTaskDao.save(subTask);
     }
 
     @Override

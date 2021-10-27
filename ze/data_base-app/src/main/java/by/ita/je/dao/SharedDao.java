@@ -15,4 +15,10 @@ public interface SharedDao extends CrudRepository<SharedList, Long> {
 
     @Query(value = "SELECT s FROM SharedList s WHERE (s.toId = :toId) AND (s.forChanges = :change)")
     public List<SharedList> readAllByUserIdChange(Long toId, boolean change);
+
+    @Query(value = "SELECT s FROM SharedList s WHERE s.toId = :toId")
+    public List<SharedList> readAllByToId(Long toId);
+
+    @Query(value = "SELECT s FROM SharedList s WHERE (s.toDoId = :toDoId) AND (s.toId = :toId)")
+    public SharedList readByToDoIdToId(Long toDoId, Long toId);
 }

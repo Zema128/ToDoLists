@@ -51,8 +51,18 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
+    public void sentMail(Long toDoId){
+        ToDo toDo = readById(toDoId);
+        toDo.setSentMessage(true);
+        toDoDao.save(toDo);
+    }
+
+    @Override
     public ToDo update(ToDo toDo, Long id) {
         ToDo toDoUpd = toDoDao.findById(id).orElseThrow(() -> new RuntimeException("UPDATE EXC"));
+        if (toDoUpd.getTimeNotification() != toDo.getTimeNotification()){
+            toDoUpd.setSentMessage(false);
+        }
         toDoUpd.setDone(toDo.isDone());
         toDoUpd.setText(toDo.getText());
         toDoUpd.setTimeNotification(toDo.getTimeNotification());

@@ -34,6 +34,7 @@ public class ToDo {
     @NotEmpty
     private String text;
     private boolean done;
+    private boolean sentMessage;
 
     @JsonIgnore
     @ManyToOne

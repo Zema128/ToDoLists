@@ -43,7 +43,7 @@ public class EmailController {
         String html = "<h3>Hello Man! Here's a link to reset your password, go quickly!</h3><body>\n" +
                 "  <p><a href='" + url + "'><h3>Here!</h3></a></p>\n" +
                 " </body>";
-        emailService.sendMessage(url, user.getEmail(), "Password recovery!","vladzemec@gmail.com", html);
+        emailService.sendMessage(user.getEmail(), "Password recovery!","vladzemec@gmail.com", html);
         return "successful";
     }
 

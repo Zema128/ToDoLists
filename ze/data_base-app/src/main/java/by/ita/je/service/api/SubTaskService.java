@@ -14,5 +14,7 @@ public interface SubTaskService {
 
     SubTask update(SubTask subTask, Long id);
 
+    void sentMail(Long subTaskId);
+
     List<SubTask> readAll();
 }

@@ -10,4 +10,6 @@ public interface SharedService {
     List<SharedList> sharedListsRead(Long toId);
 
     List<SharedList> sharedListsChange(Long toId);
+
+    void delete(Long ToDoid, Long toId);
 }

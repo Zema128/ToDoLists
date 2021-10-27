@@ -45,4 +45,9 @@ public class SubTaskController {
                 .map(subTask -> objectMapper.convertValue(subTask, SubTaskDto.class)).collect(Collectors.toList());
         return subTaskDtos;
     }
+
+    @GetMapping("/sentsubtask/{subTaskId}")
+    public void sentToDo(@PathVariable("subTaskId") Long subTaskId){
+        subTaskService.sentMail(subTaskId);
+    }
 }

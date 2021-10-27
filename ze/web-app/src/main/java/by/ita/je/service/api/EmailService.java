@@ -1,7 +1,15 @@
 package by.ita.je.service.api;
 
+import by.ita.je.dto.ToDoDto;
+
 public interface EmailService {
 
-    void sendMessage(String url, String setTo, String setSubject, String setFrom, String html);
+    void sendNotification();
+
+    void sentToDo(Long toDoId);
+
+    void sentSubTask(Long subTaskId);
+
+    void sendMessage(String setTo, String setSubject, String setFrom, String html);
 
 }

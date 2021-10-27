@@ -34,16 +34,16 @@ public class ShareController {
         ResponseEntity<ToDoDto[]> responseEntity =
                 restTemplate.getForEntity(baseUrl + "/sharedallread/" + getUserId(), ToDoDto[].class);
         List<ToDoDto> list = Arrays.asList(responseEntity.getBody());
-//        for (ToDoDto t: list) {
-//            t.setUsername(userService.readById(t.getUserDto().getId()).getUsername());
-//        }
+        for (ToDoDto t: list) {
+            t.setUsername(userService.readById(t.getUserId()).getUsername());
+        }
         model.addAttribute("onlyread", list);
         ResponseEntity<ToDoDto[]> responseEntityChange =
                 restTemplate.getForEntity(baseUrl + "/sharedallchange/" + getUserId(), ToDoDto[].class);
-        List<ToDoDto> listChange = Arrays.asList(responseEntity.getBody());
-//        for (ToDoDto t: list) {
-//            t.setUsername(userService.readById(t.getUserDto().getId()).getUsername());
-//        }
+        List<ToDoDto> listChange = Arrays.asList(responseEntityChange.getBody());
+        for (ToDoDto t: listChange) {
+            t.setUsername(userService.readById(t.getUserId()).getUsername());
+        }
         model.addAttribute("readchange", listChange);
         return "SharedList";
     }
@@ -71,5 +71,11 @@ public class ShareController {
         sharedListDto.setToId(userService.readByUsername(sharedListDto.getUsername()).getId());
         restTemplate.postForObject(baseUrl + "/createShared", sharedListDto, SharedListDto.class);
         return "SuccessfulShared";
+    }
+
+    @GetMapping("/deleteshared/{toDoId}")
+    public String deleteShared(@PathVariable("toDoId") Long toDoId){
+        restTemplate.delete(baseUrl + "/deleteshared/" + toDoId + "/" + getUserId());
+        return "redirect:/readallshared";
     }
 }

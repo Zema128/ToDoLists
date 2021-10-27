@@ -25,7 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User readByUsername(String username){
-        return userDao.findByUsername(username);
+        User user = userDao.findByUsername(username);
+        if (user == null) throw new RuntimeException("Нет такого пользователя!");
+        return user;
     }
 
     @Override

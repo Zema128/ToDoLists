@@ -8,11 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
 @Service
+@Transactional
 public class SearcherServiceImpl implements SearcherService {
 
     private final SearcherDao searcherDao;

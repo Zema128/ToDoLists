@@ -28,4 +28,5 @@ public class ToDoDto {
     private List<SubTaskDto> subTask;
     private UserDto userDto;
     private Long userId;
+    private boolean sentMessage;
 }

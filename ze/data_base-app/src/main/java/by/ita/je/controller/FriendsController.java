@@ -1,10 +1,7 @@
 package by.ita.je.controller;
 
 import by.ita.je.dto.InviteDto;
-import by.ita.je.dto.ToDoDto;
-import by.ita.je.dto.UserDto;
 import by.ita.je.model.Invite;
-import by.ita.je.service.InviteServiceImpl;
 import by.ita.je.service.api.BusinessService;
 import by.ita.je.service.api.InviteService;
 import by.ita.je.service.api.UserService;

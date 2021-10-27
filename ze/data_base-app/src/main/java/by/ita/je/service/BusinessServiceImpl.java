@@ -14,6 +14,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BusinessServiceImpl implements BusinessService {
     private final UserService userService;
     private final ToDoService toDoService;
@@ -46,7 +47,7 @@ public class BusinessServiceImpl implements BusinessService {
         List<SharedList> sharedLists = sharedService.sharedListsRead(toId);
         List<ToDo> toDos = new ArrayList<>();
         for (SharedList shar:sharedLists) {
-            toDos.add(toDoService.readById(shar.getToId()));
+            toDos.add(toDoService.readById(shar.getToDoId()));
         }
         return toDos;
     }
@@ -56,7 +57,7 @@ public class BusinessServiceImpl implements BusinessService {
         List<SharedList> sharedLists = sharedService.sharedListsChange(toId);
         List<ToDo> toDos = new ArrayList<>();
         for (SharedList shar:sharedLists) {
-            toDos.add(toDoService.readById(shar.getToId()));
+            toDos.add(toDoService.readById(shar.getToDoId()));
         }
         return toDos;
     }

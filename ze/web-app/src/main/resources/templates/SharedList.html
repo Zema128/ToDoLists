@@ -53,6 +53,7 @@
                     <th scope="col">От кого</th>
                     <th scope="col">Description</th>
                     <th scope="col">Time notification</th>
+                    <th scope="col">Удалить из списка</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,6 +65,9 @@
                     <td th:text="${read.username}">Text</td>
                     <td th:text="${read.text}">2021</td>
                     <td th:text="${read.timeNotification}">2021</td>
+                    <td>
+                        <a class="btn btn-danger" th:href="@{/deleteshared/{toDoId}(toDoId=${read.id})}"><i class="far fa-trash-alt"></i></a>
+                    </td>
                 </tbody>
                 </tr>
             </table>
@@ -76,6 +80,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">Time notification</th>
                     <th scope="col">Actions</th>
+                    <th scope="col">Удалить из списка</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -88,7 +93,10 @@
                     <td th:text="${change.text}">2021</td>
                     <td th:text="${change.timeNotification}">2021</td>
                     <td>
-                        <a class="btn btn-danger" th:href="@{/update/{id}(id=${change.id})}"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-success" th:href="@{/update/{id}(id=${change.id})}"><i class="fas fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" th:href="@{/deleteshared/{toDoId}(toDoId=${change.id})}"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tbody>
                 </tr>

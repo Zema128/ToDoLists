@@ -6,10 +6,12 @@ import by.ita.je.service.api.InviteService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @AllArgsConstructor
 @Service
+@Transactional
 public class InviteServiceImpl implements InviteService {
     private final InviteDao inviteDao;
 

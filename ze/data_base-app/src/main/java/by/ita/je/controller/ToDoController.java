@@ -55,4 +55,25 @@ public class ToDoController {
                 .map(toDo -> objectMapper.convertValue(toDo, ToDoDto.class)).collect(Collectors.toList());
         return toDoDtos;
     }
+
+    @GetMapping("/todosformessage")
+    public List<ToDoDto> todosForMessage(){
+        List<ToDo> toDoList = toDoService.readAll();
+        List<ToDoDto> toDoDtos = toDoList
+                .stream()
+                .map(toDo -> objectMapper.convertValue(toDo, ToDoDto.class)).collect(Collectors.toList());
+        for (ToDoDto t: toDoDtos) {
+            for (ToDo td: toDoList) {
+                if (td.getId() == t.getId()){
+                    t.setUserId(td.getUser().getId());
+                }
+            }
+        }
+        return toDoDtos;
+    }
+
+    @GetMapping("/senttodo/{toDoId}")
+    public void sentToDo(@PathVariable("toDoId") Long toDoId){
+        toDoService.sentMail(toDoId);
+    }
 }

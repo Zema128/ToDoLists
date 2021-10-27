@@ -28,10 +28,18 @@ public class SharedController {
     @GetMapping("/sharedallread/{toId}")
     public List<ToDoDto> readAllByToIdRead(@PathVariable("toId") Long toId){
         List<ToDo> sharedLists = businessService.sharedListsRead(toId);
-        return sharedLists
+        List<ToDoDto> list = sharedLists
                 .stream()
                 .map(sharedList -> objectMapper.convertValue(sharedList, ToDoDto.class))
                 .collect(Collectors.toList());
+        for (ToDoDto t: list) {
+            for (ToDo td: sharedLists) {
+                if (td.getId() == t.getId()){
+                    t.setUserId(td.getUser().getId());
+                }
+            }
+        }
+        return list;
     }
 
     @GetMapping("/sharedallchange/{toId}")
@@ -41,6 +49,19 @@ public class SharedController {
                 .stream()
                 .map(sharedList -> objectMapper.convertValue(sharedList, ToDoDto.class))
                 .collect(Collectors.toList());
+        for (ToDoDto t: list) {
+            for (ToDo td: sharedLists) {
+                if (td.getId() == t.getId()){
+                    t.setUserId(td.getUser().getId());
+                }
+            }
+        }
         return list;
+    }
+
+    @DeleteMapping("/deleteshared/{toDoId}/{toId}")
+    public void deleteShared(@PathVariable("toDoId") Long toDoId,
+                             @PathVariable("toId") Long toId){
+        sharedService.delete(toDoId, toId);
     }
 }

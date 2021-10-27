@@ -19,4 +19,5 @@ public class SubTaskDto {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime timeNotification;
+    private boolean sentMessage;
 }
