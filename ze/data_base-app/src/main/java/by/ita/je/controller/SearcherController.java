@@ -3,14 +3,15 @@ package by.ita.je.controller;
 import by.ita.je.dto.SearcherDateDto;
 import by.ita.je.dto.SearcherDto;
 import by.ita.je.dto.ToDoDto;
-import by.ita.je.model.ToDo;
 import by.ita.je.model.enams.Categories;
 import by.ita.je.service.api.SearcherService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

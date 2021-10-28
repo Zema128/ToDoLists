@@ -5,8 +5,6 @@ import by.ita.je.dto.SearcherDto;
 import by.ita.je.dto.ToDoDto;
 import by.ita.je.service.api.UserService;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

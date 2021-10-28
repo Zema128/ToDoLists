@@ -5,7 +5,6 @@ import by.ita.je.dto.ToDoDto;
 import by.ita.je.model.SubTask;
 import by.ita.je.model.ToDo;
 import by.ita.je.service.api.ToDoService;
-import by.ita.je.service.api.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

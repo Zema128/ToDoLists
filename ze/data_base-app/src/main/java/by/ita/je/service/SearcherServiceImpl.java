@@ -5,7 +5,6 @@ import by.ita.je.model.ToDo;
 import by.ita.je.model.enams.Categories;
 import by.ita.je.service.api.SearcherService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

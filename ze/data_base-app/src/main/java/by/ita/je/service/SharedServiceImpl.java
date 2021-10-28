@@ -2,7 +2,6 @@ package by.ita.je.service;
 
 import by.ita.je.dao.SharedDao;
 import by.ita.je.exceptions.AccessException;
-import by.ita.je.model.Invite;
 import by.ita.je.model.SharedList;
 import by.ita.je.service.api.SharedService;
 import lombok.AllArgsConstructor;

@@ -1,13 +1,14 @@
 package by.ita.je.controller;
 
 import by.ita.je.dto.ToDoDto;
-import by.ita.je.dto.UserDto;
 import by.ita.je.service.api.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;

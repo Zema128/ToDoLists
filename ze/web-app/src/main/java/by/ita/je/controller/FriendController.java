@@ -17,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @Controller
@@ -25,7 +24,6 @@ public class FriendController {
     private final RestTemplate restTemplate;
     private final String baseUrl = "http://localhost:8003/data_base-app";
     private final UserService userService;
-    private final ObjectMapper objectMapper;
 
     private Long getUserId(){
         String id = String.valueOf(userService.getCurrentUserId());

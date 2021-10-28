@@ -3,15 +3,12 @@ package by.ita.je.service;
 import by.ita.je.dao.SubTaskDao;
 import by.ita.je.exceptions.NotFoundException;
 import by.ita.je.model.SubTask;
-import by.ita.je.model.ToDo;
 import by.ita.je.service.api.SubTaskService;
-import by.ita.je.service.api.ToDoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -47,5 +47,4 @@ public class InviteServiceImpl implements InviteService {
     public void deleteInvite(Long id){
         inviteDao.deleteById(id);
     }
-
 }

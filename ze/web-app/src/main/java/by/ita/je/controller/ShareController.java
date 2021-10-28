@@ -1,6 +1,5 @@
 package by.ita.je.controller;
 
-import by.ita.je.dto.InviteDto;
 import by.ita.je.dto.SharedListDto;
 import by.ita.je.dto.ToDoDto;
 import by.ita.je.service.api.UserService;

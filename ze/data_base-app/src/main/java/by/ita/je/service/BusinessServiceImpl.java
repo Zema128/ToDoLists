@@ -1,7 +1,5 @@
 package by.ita.je.service;
 
-import by.ita.je.dao.InviteDao;
-import by.ita.je.dao.UserDao;
 import by.ita.je.exceptions.AccessException;
 import by.ita.je.model.*;
 import by.ita.je.service.api.*;
@@ -32,7 +30,6 @@ public class BusinessServiceImpl implements BusinessService {
         return inviteService.create(invite);
     }
 
-    @Transactional
     @Override
     public void acceptFriend(Long id, Long userId){
         Invite invite = inviteService.readByUserIdAndToId(id, userId);
@@ -63,7 +60,6 @@ public class BusinessServiceImpl implements BusinessService {
         return toDos;
     }
 
-    @Transactional
     @Override
     public void acceptSecondFriend(Long id, Long userId){
         Invite invite = inviteService.readByUserIdAndToId(id, userId);
@@ -108,20 +104,5 @@ public class BusinessServiceImpl implements BusinessService {
             }
         }
         return list;
-    }
-
-    @Override
-    public ToDo read(Long toDoId) {
-        return toDoService.readById(toDoId);
-    }
-
-    @Override
-    public ToDo update(ToDo toDo, Long id) {
-        return null;
-    }
-
-    @Override
-    public void delete(Long id) {
-        toDoService.deleteById(id);
     }
 }
