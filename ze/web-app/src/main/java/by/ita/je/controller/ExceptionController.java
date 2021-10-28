@@ -1,20 +1,15 @@
 package by.ita.je.controller;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
+import by.ita.je.exceptions.UserNotFoundExceptions;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.handler.HandlerExceptionResolverComposite;
-import org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver;
-import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 
 @ControllerAdvice
 public class ExceptionController {
@@ -24,7 +19,20 @@ public class ExceptionController {
         int code = exception.getRawStatusCode();
         String message = exception.getMessage();
         model.addAttribute("exceptionNumber", code);
-        model.addAttribute("message", message);
+        model.addAttribute("message", message.replaceAll("[^\\а-яёА-ЯЁ ]", ""));
         return "error";
+    }
+
+    @ExceptionHandler(UserNotFoundExceptions.class)
+    public ModelAndView handleError(HttpServletRequest req, Exception exception)
+            throws Exception {
+        if (AnnotationUtils.findAnnotation(exception.getClass(),
+                ResponseStatus.class) != null)
+            throw exception;
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", exception);
+        mav.addObject("status", 500);
+        mav.setViewName("support");
+        return mav;
     }
 }
