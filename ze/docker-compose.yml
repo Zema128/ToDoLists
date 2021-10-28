@@ -6,6 +6,9 @@ services:
     container_name: web-app
     build: ./web-app
     image: zemec:web-app
+    depends_on:
+      - webdb
+      - database-app
     ports:
       - "8001:8001"
 
@@ -13,5 +16,29 @@ services:
     container_name: data_base-app
     build: ./data_base-app
     image: zemec:data_base-app
+    depends_on:
+      - databasedb
     ports:
       - "8003:8003"
+
+  databasedb:
+    hostname: databasedb
+    image: postgres:13.4-alpine
+    env_file:
+      - ./database-db/database.env
+    volumes:
+      - ./database-db/data.sql:/docker-entrypoint-initdb.d/data.sql
+      - ./database-db/data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  webdb:
+    hostname: webdb
+    image: postgres:13.4-alpine
+    env_file:
+      - ./web-db/database.env
+    volumes:
+      - ./web-db/data.sql:/docker-entrypoint-initdb.d/data.sql
+      - ./web-db/data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"

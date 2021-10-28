@@ -1,7 +1,5 @@
-DROP TABLE if EXISTS user CASCADE;
-
-create table users (
-id bigint NOT NULL AUTO_INCREMENT,
+create table if not exists users (
+id bigserial NOT NULL,
 email varchar(255) not null,
 password varchar(255) not null,
 time_created timestamp,

@@ -36,7 +36,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    @Scheduled(fixedDelay = 8000)
+    @Scheduled(fixedDelay = 60000)
     public void sendNotification(){
         ResponseEntity<ToDoDto[]> responseEntity =
                 restTemplate.getForEntity(baseUrl + "/todosformessage", ToDoDto[].class);
