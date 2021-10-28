@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 public class ShareController {
     private final RestTemplate restTemplate;
-    private final String baseUrl = "http://localhost:8003/data_base-app";
+    private final String baseUrl = "http://database-app:8003/data_base-app";
     private final UserService userService;
 
     private Long getUserId(){

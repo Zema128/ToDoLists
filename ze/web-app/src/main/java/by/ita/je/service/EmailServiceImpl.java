@@ -6,6 +6,7 @@ import by.ita.je.model.User;
 import by.ita.je.service.api.EmailService;
 import by.ita.je.service.api.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,23 +21,22 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @Service
 public class EmailServiceImpl implements EmailService {
     @Autowired
     private JavaMailSender mailSender;
     private final RestTemplate restTemplate;
     private final UserService userService;
-    private final ObjectMapper objectMapper;
-    private final String baseUrl = "http://localhost:8003/data_base-app";
+    private final String baseUrl = "http://database-app:8003/data_base-app";
 
-    public EmailServiceImpl(RestTemplate restTemplate, UserService userService, ObjectMapper objectMapper) {
+    public EmailServiceImpl(RestTemplate restTemplate, UserService userService) {
         this.restTemplate = restTemplate;
         this.userService = userService;
-        this.objectMapper = objectMapper;
     }
 
     @Override
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = 8000)
     public void sendNotification(){
         ResponseEntity<ToDoDto[]> responseEntity =
                 restTemplate.getForEntity(baseUrl + "/todosformessage", ToDoDto[].class);
@@ -46,7 +46,7 @@ public class EmailServiceImpl implements EmailService {
                 User user = userService.readById(t.getUserId());
                 String html = "<h3>Hello " + user.getUsername() + "! Your time came!</h3><body>\n" +
                         "<h2>Text: " + t.getText() + "</h2></body>";
-                if (LocalDateTime.now().isAfter(t.getTimeNotification()) && t.isSentMessage() == false) {
+                if (LocalDateTime.now().plusHours(3).isAfter(t.getTimeNotification()) && t.isSentMessage() == false) {
                     sendMessage(user.getEmail(), "Notification!", "vladzemec@gmail.com", html);
                     sentToDo(t.getId());
                 }
@@ -57,7 +57,7 @@ public class EmailServiceImpl implements EmailService {
                     User user = userService.readById(t.getUserId());
                     String html = "<h3>Hello " + user.getUsername() + "! Your time came!</h3><body>\n" +
                             "<h2>Text: " + s.getText() + "</h2></body>";
-                    if (LocalDateTime.now().isAfter(s.getTimeNotification())) {
+                    if (LocalDateTime.now().plusHours(3).isAfter(s.getTimeNotification())) {
                         sendMessage(user.getEmail(), "Notification!", "vladzemec@gmail.com", html);
                         sentSubTask(s.getId());
                     }

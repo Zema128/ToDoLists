@@ -16,7 +16,7 @@ import java.util.List;
 public class SubTaskController {
 
     private final RestTemplate restTemplate;
-    private final String baseUrl = "http://localhost:8003/data_base-app";
+    private final String baseUrl = "http://database-app:8003/data_base-app";
     private Long toDoId;
 
     public SubTaskController(RestTemplate restTemplate) {

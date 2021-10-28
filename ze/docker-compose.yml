@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+
+  web-app:
+    container_name: web-app
+    build: ./web-app
+    image: zemec:web-app
+    ports:
+      - "8001:8001"
+
+  database-app:
+    container_name: data_base-app
+    build: ./data_base-app
+    image: zemec:data_base-app
+    ports:
+      - "8003:8003"
