@@ -17,10 +17,10 @@ import static org.mockito.Mockito.verify;
 class SharedServiceImplTest {
 
     @Mock
-    SharedDao sharedDao;
+    private SharedDao sharedDao;
 
     @InjectMocks
-    SharedServiceImpl sharedService;
+    private SharedServiceImpl sharedService;
 
     @Test
     void createShared() {

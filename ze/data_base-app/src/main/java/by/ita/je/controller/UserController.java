@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +21,10 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public void create(@PathVariable("id") Long id){
-        userService.create(id);
+        User user = new User();
+        user.setId(id);
+        user.setTimeCreated(LocalDateTime.now());
+        userService.create(user);
     }
 
     @GetMapping("/friends/{id}")

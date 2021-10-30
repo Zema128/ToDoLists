@@ -21,11 +21,8 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
     @Override
-    public User create(Long id) {
-        User newUser = new User();
-        newUser.setId(id);
-        newUser.setTimeCreated(LocalDateTime.now());
-        return userDao.save(newUser);
+    public User create(User user) {
+        return userDao.save(user);
     }
 
     @Override

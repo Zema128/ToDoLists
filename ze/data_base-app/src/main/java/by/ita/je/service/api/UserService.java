@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface UserService {
 
-    User create(Long id);
+    User create(User user);
 
     User readById(Long id);
 
