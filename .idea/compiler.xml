@@ -10,6 +10,12 @@
         <module name="data_base-app" />
         <module name="web-app" />
       </profile>
+      <profile name="Annotation profile for Unknown" enabled="true">
+        <sourceOutputDir name="../../target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="wrapper" />
+      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
