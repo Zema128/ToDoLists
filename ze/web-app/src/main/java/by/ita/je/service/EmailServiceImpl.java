@@ -1,5 +1,6 @@
 package by.ita.je.service;
 
+import by.ita.je.config.MyConstants;
 import by.ita.je.dto.SubTaskDto;
 import by.ita.je.dto.ToDoDto;
 import by.ita.je.model.User;
@@ -28,7 +29,6 @@ public class EmailServiceImpl implements EmailService {
     private JavaMailSender mailSender;
     private final RestTemplate restTemplate;
     private final UserService userService;
-    private final String baseUrl = "http://database-app:8003/data_base-app";
 
     public EmailServiceImpl(RestTemplate restTemplate, UserService userService) {
         this.restTemplate = restTemplate;
@@ -39,7 +39,7 @@ public class EmailServiceImpl implements EmailService {
     @Scheduled(fixedDelay = 10000)
     public void sendNotification(){
         ResponseEntity<ToDoDto[]> responseEntity =
-                restTemplate.getForEntity(baseUrl + "/todosformessage", ToDoDto[].class);
+                restTemplate.getForEntity(MyConstants.BASE_URL + "/todosformessage", ToDoDto[].class);
         List<ToDoDto> toDos = Arrays.asList(responseEntity.getBody());
         for (ToDoDto t : toDos) {
             if (t.getTimeNotification() != null){
@@ -68,12 +68,12 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sentToDo(Long toDoId){
-        restTemplate.getForObject(baseUrl + "/senttodo/" + toDoId, ToDoDto.class);
+        restTemplate.getForObject(MyConstants.BASE_URL + "/senttodo/" + toDoId, ToDoDto.class);
     }
 
     @Override
     public void sentSubTask(Long subTaskId){
-        restTemplate.getForObject(baseUrl + "/sentsubtask/" + subTaskId, SubTaskDto.class);
+        restTemplate.getForObject(MyConstants.BASE_URL + "/sentsubtask/" + subTaskId, SubTaskDto.class);
     }
 
     @Override

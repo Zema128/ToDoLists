@@ -20,6 +20,7 @@ public class EmailController {
     private final EmailService emailService;
     private final ObjectMapper objectMapper;
     private Long userId;
+    private final String url = "http://localhost:8001/web-app/recoverpass";
 
 
     public EmailController(UserService userService, EmailService emailService,
@@ -39,7 +40,6 @@ public class EmailController {
     public String sendSimpleEmail(UserDto userDto) {
         User user = userService.readByUsername(userDto.getUsername());
         this.userId = user.getId();
-        String url = "http://localhost:8001/web-app/recoverpass";
         String html = "<h3>Hello Man! Here's a link to reset your password, go quickly!</h3><body>\n" +
                 "  <p><a href='" + url + "'><h3>Here!</h3></a></p>\n" +
                 " </body>";

@@ -1,5 +1,6 @@
 package by.ita.je.controller;
 
+import by.ita.je.config.MyConstants;
 import by.ita.je.dto.UserDto;
 import by.ita.je.model.User;
 import by.ita.je.service.api.UserService;
@@ -16,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 public class LoginController {
 
     private final RestTemplate restTemplate;
-    private final String baseUrl = "http://database-app:8003/data_base-app";
     private final ObjectMapper objectMapper;
     private final UserService userService;
 
@@ -40,7 +40,7 @@ public class LoginController {
     public String created(UserDto userDto) {
         User user = objectMapper.convertValue(userDto, User.class);
         User newUser = userService.create(user);
-        restTemplate.getForObject(baseUrl + "/user/" + newUser.getId(), UserDto.class);
+        restTemplate.getForObject(MyConstants.BASE_URL + "/user/" + newUser.getId(), UserDto.class);
         return "redirect:/login";
     }
 }
