@@ -7,6 +7,7 @@
     <modules>
         <module>web-app</module>
         <module>data_base-app</module>
+        <module>discovery</module>
     </modules>
 
     <parent>
@@ -56,11 +57,7 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

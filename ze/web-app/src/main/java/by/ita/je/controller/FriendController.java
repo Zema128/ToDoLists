@@ -1,11 +1,10 @@
 package by.ita.je.controller;
 
-import by.ita.je.config.MyConstants;
+import by.ita.je.config.ClientConfig;
 import by.ita.je.dto.InviteDto;
 import by.ita.je.dto.UserDto;
 import by.ita.je.model.User;
 import by.ita.je.service.api.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,6 +23,9 @@ import java.util.List;
 public class FriendController {
     private final RestTemplate restTemplate;
     private final UserService userService;
+    private final ClientConfig clientConfig;
+
+
 
     private Long getUserId(){
         String id = String.valueOf(userService.getCurrentUserId());
@@ -33,7 +35,7 @@ public class FriendController {
 
     @GetMapping("/friends")
     public String listFriends(Model model){
-        ResponseEntity<Long[]> userDtos = restTemplate.getForEntity(MyConstants.BASE_URL + "/friends/" + getUserId(),
+        ResponseEntity<Long[]> userDtos = restTemplate.getForEntity(clientConfig.getUrl() + "/friends/" + getUserId(),
                 Long[].class);
         List<Long> listUser = Arrays.asList(userDtos.getBody());
         List<User> friends = new ArrayList<>();
@@ -42,7 +44,7 @@ public class FriendController {
         }
         model.addAttribute("friends", friends);
         ResponseEntity<InviteDto[]> responseEntity =
-                restTemplate.getForEntity(MyConstants.BASE_URL + "/invite/" + getUserId(), InviteDto[].class);
+                restTemplate.getForEntity(clientConfig.getUrl() + "/invite/" + getUserId(), InviteDto[].class);
         List<InviteDto> listInvites = Arrays.asList(responseEntity.getBody());
         List<User> invitedList = new ArrayList<>();
         for (InviteDto invite : listInvites) {
@@ -65,25 +67,25 @@ public class FriendController {
         InviteDto invite = new InviteDto();
         invite.setFromUser_id(getUserId());
         invite.setToUser_id(user.getId());
-        restTemplate.postForObject(MyConstants.BASE_URL + "/addfriend", invite, InviteDto.class);
+        restTemplate.postForObject(clientConfig.getUrl() + "/addfriend", invite, InviteDto.class);
         return "redirect:/friends";
     }
 
     @GetMapping("/acceptfriend/{id}")
     public String acceptFriend(@PathVariable("id") Long id){
-        restTemplate.getForObject(MyConstants.BASE_URL + "/acceptfriend/" + id + "/" + getUserId(), InviteDto.class);
+        restTemplate.getForObject(clientConfig.getUrl() + "/acceptfriend/" + id + "/" + getUserId(), InviteDto.class);
         return "redirect:/friends";
     }
 
     @GetMapping("/deniedfriend/{id}")
     public String deniedFriend(@PathVariable("id") Long id){
-        restTemplate.delete(MyConstants.BASE_URL + "/deniedfriend/" + id + "/" +getUserId());
+        restTemplate.delete(clientConfig.getUrl() + "/deniedfriend/" + id + "/" +getUserId());
         return "redirect:/friends";
     }
 
     @GetMapping("/deletefriend/{id}")
     public String deleteFriend(@PathVariable("id") Long id){
-        restTemplate.delete(MyConstants.BASE_URL + "/deletefriend/" + id + "/" + getUserId());
+        restTemplate.delete(clientConfig.getUrl() + "/deletefriend/" + id + "/" + getUserId());
         return "redirect:/friends";
     }
 }

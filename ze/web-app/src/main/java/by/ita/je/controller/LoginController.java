@@ -1,6 +1,6 @@
 package by.ita.je.controller;
 
-import by.ita.je.config.MyConstants;
+import by.ita.je.config.ClientConfig;
 import by.ita.je.dto.UserDto;
 import by.ita.je.model.User;
 import by.ita.je.service.api.UserService;
@@ -19,6 +19,7 @@ public class LoginController {
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
     private final UserService userService;
+    private final ClientConfig clientConfig;
 
     @GetMapping("/login")
     public String login(){
@@ -40,7 +41,7 @@ public class LoginController {
     public String created(UserDto userDto) {
         User user = objectMapper.convertValue(userDto, User.class);
         User newUser = userService.create(user);
-        restTemplate.getForObject(MyConstants.BASE_URL + "/user/" + newUser.getId(), UserDto.class);
+        restTemplate.getForObject(clientConfig.getUrl() + "/user/" + newUser.getId(), UserDto.class);
         return "redirect:/login";
     }
 }

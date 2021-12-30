@@ -1,6 +1,6 @@
 package by.ita.je.controller;
 
-import by.ita.je.config.MyConstants;
+import by.ita.je.config.ClientConfig;
 import by.ita.je.dto.ToDoDto;
 import by.ita.je.service.api.UserService;
 import lombok.AllArgsConstructor;
@@ -21,6 +21,7 @@ public class ToDoController {
 
     private final RestTemplate restTemplate;
     private final UserService userService;
+    private final ClientConfig clientConfig;
 
     private Long getUserId(){
         String id = String.valueOf(userService.getCurrentUserId());
@@ -31,7 +32,7 @@ public class ToDoController {
     @GetMapping("/")
     public String home(Model model){
         ResponseEntity<ToDoDto[]> responseEntity =
-                restTemplate.getForEntity(MyConstants.BASE_URL + "/todos/" + getUserId(), ToDoDto[].class);
+                restTemplate.getForEntity(clientConfig.getUrl() + "/todos/" + getUserId(), ToDoDto[].class);
         List<ToDoDto> list = Arrays.asList(responseEntity.getBody());
         model.addAttribute("todos", list);
         return "home";
@@ -45,26 +46,26 @@ public class ToDoController {
 
     @PostMapping("/createtodo")
     public String createdToDo(ToDoDto toDoDto){
-        restTemplate.postForObject(MyConstants.BASE_URL + "/create/" + getUserId(), toDoDto, ToDoDto.class);
+        restTemplate.postForObject(clientConfig.getUrl() + "/create/" + getUserId(), toDoDto, ToDoDto.class);
         return "redirect:/";
     }
 
     @GetMapping(value = "/update/{id}")
     public String update(@PathVariable(value = "id", required = false) Long id, Model model){
-        ToDoDto toDoDto= restTemplate.getForObject(MyConstants.BASE_URL + "/todo/" + id, ToDoDto.class);
+        ToDoDto toDoDto= restTemplate.getForObject(clientConfig.getUrl() + "/todo/" + id, ToDoDto.class);
         model.addAttribute("todo", toDoDto);
         return "FormUpdate";
     }
 
     @PostMapping(value = "/update")
     public String updated(ToDoDto toDoDto){
-        restTemplate.put(MyConstants.BASE_URL + "/update/" + toDoDto.getId(), toDoDto, ToDoDto.class);
+        restTemplate.put(clientConfig.getUrl() + "/update/" + toDoDto.getId(), toDoDto, ToDoDto.class);
         return "redirect:/";
     }
 
     @GetMapping(value = "/deletetodo/{id}")
     public String deleteById(@PathVariable(value = "id",required = false) Long id){
-        restTemplate.delete(MyConstants.BASE_URL + "/delete/" + id);
+        restTemplate.delete(clientConfig.getUrl() + "/delete/" + id);
         return "redirect:/";
     }
 

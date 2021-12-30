@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="data_base-app" />
         <module name="web-app" />
+        <module name="discovery" />
       </profile>
       <profile name="Annotation profile for Unknown" enabled="true">
         <sourceOutputDir name="../../target/generated-sources/annotations" />
@@ -21,6 +22,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="data_base-app" options="-parameters" />
+      <module name="discovery" options="-parameters" />
       <module name="web-app" options="-parameters" />
     </option>
   </component>

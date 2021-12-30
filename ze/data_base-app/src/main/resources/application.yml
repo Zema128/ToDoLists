@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /data_base-app
 spring:
+  application:
+    name: data-base
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -13,3 +15,9 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_HOST:http://localhost:8761/eureka/}
+  instance:
+    instance-id: data-base

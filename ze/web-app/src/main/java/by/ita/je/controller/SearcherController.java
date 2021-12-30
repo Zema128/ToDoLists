@@ -1,6 +1,6 @@
 package by.ita.je.controller;
 
-import by.ita.je.config.MyConstants;
+import by.ita.je.config.ClientConfig;
 import by.ita.je.dto.SearcherDateDto;
 import by.ita.je.dto.SearcherDto;
 import by.ita.je.dto.ToDoDto;
@@ -25,6 +25,7 @@ public class SearcherController {
 
     private final RestTemplate restTemplate;
     private final UserService userService;
+    private final ClientConfig clientConfig;
 
     private Long getUserId(){
         String id = String.valueOf(userService.getCurrentUserId());
@@ -36,7 +37,7 @@ public class SearcherController {
     public String searchByPersonal(Model model){
         SearcherDto searcherDto = new SearcherDto(getUserId(), "PERSONAL");
         ResponseEntity<ToDoDto[]> responseEntity =
-                restTemplate.postForEntity(MyConstants.BASE_URL + "/searchcategories", searcherDto, ToDoDto[].class);
+                restTemplate.postForEntity(clientConfig.getUrl() + "/searchcategories", searcherDto, ToDoDto[].class);
         List<ToDoDto> list = Arrays.asList(responseEntity.getBody());
         model.addAttribute("categor", list);
         return "PersonalList";
@@ -46,7 +47,7 @@ public class SearcherController {
     public String searchByWork(Model model){
         SearcherDto searcherDto = new SearcherDto(getUserId(), "WORK");
         ResponseEntity<ToDoDto[]> responseEntity =
-                restTemplate.postForEntity(MyConstants.BASE_URL + "/searchcategories", searcherDto, ToDoDto[].class);
+                restTemplate.postForEntity(clientConfig.getUrl() + "/searchcategories", searcherDto, ToDoDto[].class);
         List<ToDoDto> list = Arrays.asList(responseEntity.getBody());
         model.addAttribute("categor", list);
         return "WorkList";
@@ -56,7 +57,7 @@ public class SearcherController {
     public String searchByUsers(Model model){
         SearcherDto searcherDto = new SearcherDto(getUserId(), "USERS");
         ResponseEntity<ToDoDto[]> responseEntity =
-                restTemplate.postForEntity(MyConstants.BASE_URL + "/searchcategories", searcherDto, ToDoDto[].class);
+                restTemplate.postForEntity(clientConfig.getUrl() + "/searchcategories", searcherDto, ToDoDto[].class);
         List<ToDoDto> list = Arrays.asList(responseEntity.getBody());
         model.addAttribute("categor", list);
         return "UsersList";
@@ -71,7 +72,7 @@ public class SearcherController {
         LocalDateTime to = LocalDateTime.parse(dateTo, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
         SearcherDateDto searcherDateDto = new SearcherDateDto(from, to);
         ResponseEntity<ToDoDto[]> responseEntity =
-                restTemplate.postForEntity(MyConstants.BASE_URL + "/betweendates/" + getUserId(), searcherDateDto, ToDoDto[].class);
+                restTemplate.postForEntity(clientConfig.getUrl() + "/betweendates/" + getUserId(), searcherDateDto, ToDoDto[].class);
         List<ToDoDto> list = Arrays.asList(responseEntity.getBody());
         model.addAttribute("categor", list);
         return "BetweenDates";
@@ -84,7 +85,7 @@ public class SearcherController {
         System.out.println("From: " + from + " to: " + to);
         SearcherDateDto searcherDateDto = new SearcherDateDto(from, to);
         ResponseEntity<ToDoDto[]> responseEntity =
-                restTemplate.postForEntity(MyConstants.BASE_URL + "/betweendates/" + getUserId(), searcherDateDto, ToDoDto[].class);
+                restTemplate.postForEntity(clientConfig.getUrl() + "/betweendates/" + getUserId(), searcherDateDto, ToDoDto[].class);
         List<ToDoDto> list = Arrays.asList(responseEntity.getBody());
         model.addAttribute("categor", list);
         return "TodayTasks";
