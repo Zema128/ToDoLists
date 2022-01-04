@@ -15,6 +15,10 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
+  liquibase:
+    url: jdbc:postgresql://webdb:5432/web
+    user: postgres
+    password: postgres
 eureka:
   client:
     service-url:

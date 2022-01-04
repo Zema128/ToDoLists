@@ -1,6 +1,7 @@
 package by.ita.je.controller;
 
 import by.ita.je.exceptions.UserNotFoundExceptions;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Slf4j
 @ControllerAdvice
 public class ExceptionController {
 
@@ -18,8 +20,9 @@ public class ExceptionController {
     public String handleException(HttpStatusCodeException exception, Model model) {
         int code = exception.getRawStatusCode();
         String message = exception.getMessage();
+        log.error(message);
         model.addAttribute("exceptionNumber", code);
-        model.addAttribute("message", message.replaceAll("[^\\а-яёА-ЯЁ ]", ""));
+        model.addAttribute("message", message); //.replaceAll("[^\\а-яёА-ЯЁ ]", "")
         return "error";
     }
 
@@ -30,6 +33,7 @@ public class ExceptionController {
                 ResponseStatus.class) != null)
             throw exception;
         ModelAndView mav = new ModelAndView();
+        log.error(exception.getMessage());
         mav.addObject("exception", exception);
         mav.addObject("status", 500);
         mav.setViewName("support");

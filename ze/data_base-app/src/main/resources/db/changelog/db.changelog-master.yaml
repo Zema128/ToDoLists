@@ -1,0 +1,42 @@
+databaseChangeLog:
+#  - logicalFilePath: db/changelog/db.changelog-add_new_todo.yaml
+  - changeSet:
+      id: 1
+      author: Vasia
+      comment: "Add ToDo"
+      changes:
+        - insert:
+            tableName: to_do
+            columns:
+              - column:
+                  name: "user_id"
+                  value: "1"
+              - column:
+                  name: "text"
+                  value: "Description with Liquibase"
+              - column:
+                  name: "done"
+                  value: "false"
+              - column:
+                  name: "sent_message"
+                  value: "false"
+  - changeSet:
+      id: 2
+      author: Vasia
+      comment: "Add ToDo 2"
+      changes:
+        - insert:
+            tableName: to_do
+            columns:
+              - column:
+                  name: "user_id"
+                  value: "1"
+              - column:
+                  name: "text"
+                  value: "Second description with Liquibase"
+              - column:
+                  name: "done"
+                  value: "false"
+              - column:
+                  name: "sent_message"
+                  value: "false"
