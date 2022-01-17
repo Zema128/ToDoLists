@@ -8,6 +8,8 @@
         <module>web-app</module>
         <module>data_base-app</module>
         <module>discovery</module>
+        <module>kafka_producer</module>
+        <module>kafka_consumer</module>
     </modules>
 
     <parent>

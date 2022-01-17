@@ -22,7 +22,7 @@ public class ExceptionController {
         String message = exception.getMessage();
         log.error(message);
         model.addAttribute("exceptionNumber", code);
-        model.addAttribute("message", message); //.replaceAll("[^\\а-яёА-ЯЁ ]", "")
+        model.addAttribute("message", message.replaceAll("[^\\а-яёА-ЯЁ ]", ""));
         return "error";
     }
 

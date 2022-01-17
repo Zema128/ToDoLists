@@ -1,0 +1,7 @@
+spring:
+  kafka:
+    bootstrapAddress: localhost:9092
+    topic:
+      name: TestTopic
+server:
+  port: 7578

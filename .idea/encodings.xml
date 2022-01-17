@@ -3,6 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/ze/data_base-app/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ze/discovery/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ze/kafka_consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ze/kafka_producer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ze/web-app/src/main/java" charset="UTF-8" />
   </component>
 </project>

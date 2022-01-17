@@ -10,6 +10,8 @@
         <module name="data_base-app" />
         <module name="web-app" />
         <module name="discovery" />
+        <module name="kafka_producer" />
+        <module name="kafka_consumer" />
       </profile>
       <profile name="Annotation profile for Unknown" enabled="true">
         <sourceOutputDir name="../../target/generated-sources/annotations" />
@@ -23,6 +25,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="data_base-app" options="-parameters" />
       <module name="discovery" options="-parameters" />
+      <module name="kafka_consumer" options="-parameters" />
+      <module name="kafka_producer" options="-parameters" />
       <module name="web-app" options="-parameters" />
     </option>
   </component>
