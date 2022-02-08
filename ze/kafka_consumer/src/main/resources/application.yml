@@ -1,0 +1,5 @@
+spring:
+  kafka:
+    server: kafka:9092
+    group:
+      id: group1
