@@ -1,5 +1,9 @@
-spring:
-  kafka:
-    server: kafka:9092
-    group:
-      id: group1
+kafka:
+  server: kafka:9092
+  group:
+    id: group1
+server:
+  port: 7579
+#spring:
+#  kafka:
+#    bootstrap-servers: kafka:9092

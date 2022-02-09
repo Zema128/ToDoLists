@@ -10,6 +10,7 @@
         <module>discovery</module>
         <module>kafka_producer</module>
         <module>kafka_consumer</module>
+        <module>mongodb</module>
     </modules>
 
     <parent>

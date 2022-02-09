@@ -85,3 +85,12 @@ services:
       - kafka
     ports:
       - "7578:7578"
+
+  kafka_consumer:
+    container_name: kafka_consumer
+    build: ./kafka_consumer
+    image: zemec:kafka_consumer
+    depends_on:
+      - kafka
+    ports:
+      - "7579:7579"
