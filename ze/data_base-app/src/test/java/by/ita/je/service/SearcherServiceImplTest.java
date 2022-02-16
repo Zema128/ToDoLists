@@ -1,18 +1,22 @@
 package by.ita.je.service;
 
+import by.ita.je.model.ToDo;
+import by.ita.je.model.enams.Categories;
+import by.ita.je.service.api.SearcherService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
-class SearcherServiceImplTest {
+public class SearcherServiceImplTest {
+
+    @Autowired
+    SearcherService searcherService;
 
     @Test
-    void listCategories() {
-        //База
+    public void listCategories() {
+        List<ToDo> toDos = searcherService.listCategories(1L, Categories.PERSONAL);
+        System.out.println(toDos.get(0).getText());
     }
 
-    @Test
-    void listBetweenDated() {
-        //База
-    }
 }
