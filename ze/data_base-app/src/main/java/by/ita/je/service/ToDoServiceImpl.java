@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public ToDo readById(Long id) {
-        return toDoDao.findById(id).get();
+        return toDoDao.findById(id).orElseThrow(() -> new RuntimeException("ToDo Nine!"));
     }
 
     @Override

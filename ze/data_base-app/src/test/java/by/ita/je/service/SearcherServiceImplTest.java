@@ -15,8 +15,7 @@ public class SearcherServiceImplTest {
 
     @Test
     public void listCategories() {
-        List<ToDo> toDos = searcherService.listCategories(1L, Categories.PERSONAL);
-        System.out.println(toDos.get(0).getText());
+
     }
 
 }
